@@ -9,6 +9,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import { LoginComponent } from './login/login.component';
 import { SpotifyService } from './services/spotify/spotify.service';
+import { HttpModule } from '@angular/http'
 
 @NgModule({
   declarations: [
@@ -26,8 +27,9 @@ import { SpotifyService } from './services/spotify/spotify.service';
     MatSidenavModule,
     MatIconModule,
     MatListModule
+    HttpModule
   ],
-  providers: [SpotifyService],
+  providers: [SpotifyService, HttpModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
