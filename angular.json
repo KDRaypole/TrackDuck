@@ -134,5 +134,10 @@
       }
     }
   },
-  "defaultProject": "TrackDuck"
+  "defaultProject": "TrackDuck",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

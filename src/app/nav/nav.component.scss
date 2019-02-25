@@ -3,9 +3,14 @@
 }
 
 .sidenav {
-  width: 200px;
+  width: 100px;
 }
 
+#sidebar-nav {
+  .mat-icon{
+    padding-left: 30%
+  }
+}
 .sidenav .mat-toolbar {
   background: inherit;
 }
