@@ -26,7 +26,7 @@ import { HttpModule } from '@angular/http'
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
     HttpModule
   ],
   providers: [SpotifyService, HttpModule],
