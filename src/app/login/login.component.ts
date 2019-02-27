@@ -7,8 +7,8 @@ import { SpotifyService } from '../services/spotify/spotify.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  private apiInfo: any;
   private user: Object;
+  private playlists: any[];
 
   constructor(private _spotify: SpotifyService) { }
 
@@ -41,7 +41,8 @@ export class LoginComponent implements OnInit {
   getPlaylists() {
     this._spotify.getCurrentUserPlaylists()
       .subscribe(data => {
-        console.log(data)
+        console.log(data.items)
+        this.playlists = data.items
       })
   }
 }
