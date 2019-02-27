@@ -1,0 +1,12 @@
+<button *ngIf="!user" (click)="login()" mat-flat-button>login</button>
+<div *ngIf="!!user" class="">
+  <p >You are logged in as: <a target="_blank" href={{user.external_urls.spotify}}>{{user.display_name}}</a></p>
+  <button (click)="getPlaylists()" type="button" name="button" mat-flat-button>Get Playlists!</button>
+</div>
+<div *ngIf="!!playlists" class="">
+  <ul>
+    <li *ngFor="let playlist of playlists">
+      {{playlist.name}}
+    </li>
+  </ul>
+</div>
