@@ -9,13 +9,15 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import { LoginComponent } from './login/login.component';
 import { SpotifyService } from './services/spotify/spotify.service';
-import { HttpModule } from '@angular/http'
+import { HttpModule } from '@angular/http';
+import { CallbackComponent } from './callback/callback.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    LoginComponent
+    LoginComponent,
+    CallbackComponent
   ],
   imports: [
     BrowserModule,
