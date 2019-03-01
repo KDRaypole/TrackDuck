@@ -1,0 +1,32 @@
+.example-card {
+  max-width: 400px;
+}
+.scrollable-playlist {
+  max-width: 400px;
+  max-height: 720px;
+  overflow-y: scroll;
+  margin: 0;
+}
+mat-card {
+  margin: 10px;
+}
+mat-card-actions {
+  form {
+    display: inline;
+  }
+}
+mat-icon {
+  cursor: pointer;
+  float: right;
+  margin-top: -13px;
+  margin-right: -13px;
+  margin-bottom: -13px;
+  margin-left: -13px;
+}
+.no-tracks {
+  text-align: center;
+}
+.selected-playlist {
+  max-height: 720px;
+  overflow-y: scroll;
+}

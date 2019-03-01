@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-sm-3">
+    <div class="scrollable-playlist">
+      <mat-card *ngFor="let playlist of playlists" class="example-card">
+        <mat-card-header>
+          <mat-card-title></mat-card-title>
+          <mat-card-subtitle>{{playlist.name}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src={{playlist.images[0].url}} alt="">
+        <mat-card-actions>
+          <button (click)="getPlaylistsSongs(user.id, playlist)" mat-button>OPEN</button>
+          <form action={{playlist.external_urls.spotify}} method="get" target="_blank">
+             <button color="primary" mat-button target="_blank" >ON SPOTIFY</button>
+          </form>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  <div class="col-sm-9">
+    <div class="selected-playlist">
+      <div *ngIf="!!tracks">
+        <mat-card *ngFor="let track of tracks">
+          <h6>
+            <strong>{{track.track.name}}</strong>
+          </h6>
+          <p style="display:inline;">
+            {{track.track.artists[0].name}}
+          </p>
+          <mat-icon (click)="removeTrack(user.id, track.track.uri, currentPlaylist.id)" color="warn">clear</mat-icon>
+        </mat-card>
+      </div>
+      <div class="no-tracks" *ngIf="!tracks">
+        <h3>
+          Oops there are no tracks loaded yet!
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>
