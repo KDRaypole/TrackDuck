@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../services/spotify/spotify.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ export class LoginComponent implements OnInit {
   private user: Object;
   private playlists: any[];
 
-  constructor(private _spotify: SpotifyService) { }
+  constructor(private _spotify: SpotifyService, private router: Router) { }
 
   ngOnInit() {
     this.getUser();
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
     this._spotify.getCurrentUser().subscribe(data => {
         console.log(data);
         this.user = data;
+        this.router.navigate(["playlist"]);
     }, err=> { console.log(err); });
   }
 
@@ -30,7 +32,11 @@ export class LoginComponent implements OnInit {
         console.log(token);
 
         this._spotify.getCurrentUser()
-            .subscribe(data=> { console.log("getCurrentUser: ", data); this.user = data },
+            .subscribe(data=> { 
+               console.log("getCurrentUser: ", data); 
+               this.user = data 
+               this.router.navigate(["playlist"]);
+            },
             err=> console.error(err));
 
     },

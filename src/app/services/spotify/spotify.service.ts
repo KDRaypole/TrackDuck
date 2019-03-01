@@ -30,6 +30,7 @@ export interface SpotifyOptions {
   time_range?: string,
   after?: string,
   before?: string,
+  snapshot_id?: any,
 }
 
 interface HttpRequestOptions {

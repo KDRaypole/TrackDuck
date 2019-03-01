@@ -6,18 +6,21 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from './nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
 import { LoginComponent } from './login/login.component';
 import { SpotifyService } from './services/spotify/spotify.service';
+import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { HttpModule } from '@angular/http';
-import { CallbackComponent } from './callback/callback.component'
+import { CallbackComponent } from './callback/callback.component';
+import { PlaylistComponent } from './playlist/playlist.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     LoginComponent,
-    CallbackComponent
+    CallbackComponent,
+    PlaylistComponent
   ],
   imports: [
     BrowserModule,
@@ -29,9 +32,10 @@ import { CallbackComponent } from './callback/callback.component'
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatCardModule,
     HttpModule
   ],
-  providers: [SpotifyService, HttpModule],
+  providers: [AuthGuardService, SpotifyService, HttpModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
