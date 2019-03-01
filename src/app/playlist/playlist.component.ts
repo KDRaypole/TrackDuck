@@ -42,22 +42,19 @@ export class PlaylistComponent implements OnInit {
       })
   }
 
-  removeTrack(user_id, track_id, playlist_id) {
+  removeTrack(user_id, track, playlist_id) {
+
     const p: Promise<string> = new Promise((resolve, reject) => {
-      console.log("User: " + user_id + " Playlist: " + playlist_id + " Track: " + track_id)
-      this._spotify.removePlaylistTracks(user_id, playlist_id, track_id)
+      this._spotify.removePlaylistTracks(user_id, playlist_id, [track.uri])
         .subscribe(data => {
-          console.log(data)
+          console.log(data.snapshot_id)
+          this._spotify.getPlaylistTracks(user_id, data.snapshot_id)
+            .subscribe(data => {
+              console.log(data.items)
+              this.tracks = data.items
+            })
         })
       resolve("done")
     });
-
-    p.then((str) => {
-      this._spotify.getPlaylistTracks(user_id, playlist_id)
-        .subscribe(data => {
-          console.log(data.items)
-          this.tracks = data.items
-        })
-    })
   }
 }

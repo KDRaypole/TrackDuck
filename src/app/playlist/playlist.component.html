@@ -26,7 +26,7 @@
           <p style="display:inline;">
             {{track.track.artists[0].name}}
           </p>
-          <mat-icon (click)="removeTrack(user.id, track.track.uri, currentPlaylist.id)" color="warn">clear</mat-icon>
+          <mat-icon (click)="removeTrack(user.id, track.track, currentPlaylist.id)" color="warn">clear</mat-icon>
         </mat-card>
       </div>
       <div class="no-tracks" *ngIf="!tracks">
