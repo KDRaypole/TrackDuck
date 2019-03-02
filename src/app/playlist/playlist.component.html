@@ -1,7 +1,13 @@
 <div class="row">
   <div class="col-sm-3">
     <div class="scrollable-playlist">
-      <mat-card *ngFor="let playlist of playlists" class="example-card">
+
+
+      <mat-card
+        (cdkDropEntered)="entered($event)"
+        *ngFor="let playlist of playlists"
+        class="example-card">
+
         <mat-card-header>
           <mat-card-title></mat-card-title>
           <mat-card-subtitle>{{playlist.name}}</mat-card-subtitle>
@@ -18,8 +24,15 @@
   </div>
   <div class="col-sm-9">
     <div class="selected-playlist">
-      <div *ngIf="!!tracks">
-        <mat-card *ngFor="let track of tracks">
+      <h4>{{currentPlaylist.name}}</h4>
+      <div
+      cdkDropList
+      class="track-list"
+      (cdkDropListDropped)="drop($event)"
+      *ngIf="!!tracks">
+
+        <mat-card class="track-box" *ngFor="let track of tracks" cdkDrag>
+          <div class="custom-placeholder" *cdkDragPlaceholder></div>
           <h6>
             <strong>{{track.track.name}}</strong>
           </h6>

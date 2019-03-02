@@ -1,0 +1,9 @@
+<section>
+  <button color='primary' *ngIf="!user" (click)="logout()" mat-flat-button>Logout</button>
+</section>
+
+<section>
+  <mat-slide-toggle color="primary" [disabled]="disabled">
+    Slide me!
+  </mat-slide-toggle>
+</section>

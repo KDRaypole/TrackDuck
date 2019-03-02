@@ -3,13 +3,15 @@ import { CanActivate, Router, RouterStateSnapshot, ActivatedRouteSnapshot } from
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
+  private token:any;
 
   constructor(
     private router: Router
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (localStorage.getItem('spotify-token')) {
+    this.token = localStorage.getItem('spotify-token')
+    if (this.token) {
       return true;
     } else {
       this.router.navigate(['/login']);
