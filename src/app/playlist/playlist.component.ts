@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../services/spotify/spotify.service';
 import { Promise } from 'es6-promise';
+import { CdkDragEnter, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-playlist',
@@ -15,7 +16,6 @@ export class PlaylistComponent implements OnInit {
 
   constructor(private _spotify: SpotifyService) {
     this._spotify.getCurrentUser().subscribe(data => {
-        console.log(data);
         this.user = data;
     }, err=> { console.log(err); });
   }
@@ -27,7 +27,6 @@ export class PlaylistComponent implements OnInit {
   getPlaylists() {
     this._spotify.getCurrentUserPlaylists()
       .subscribe(data => {
-        console.log(data.items)
         this.playlists = data.items
       })
   }
@@ -37,7 +36,6 @@ export class PlaylistComponent implements OnInit {
 
     this._spotify.getPlaylistTracks(user_id, playlist.id)
       .subscribe(data => {
-        console.log(data.items)
         this.tracks = data.items
       })
   }
@@ -45,12 +43,18 @@ export class PlaylistComponent implements OnInit {
   removeTrack(user_id, track, playlist_id) {
     this._spotify.removePlaylistTracks(user_id, playlist_id, [track.uri])
       .subscribe(data => {
-        console.log(data)
         this._spotify.getPlaylistTracks(user_id, playlist_id, {snapshot_id: data.snapshot_id})
           .subscribe(data => {
-            console.log(data.items)
             this.tracks = data.items
           })
       })
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.tracks, event.previousIndex, event.currentIndex);
+  }
+
+  entered(event: CdkDragEnter<string[]>) {
+   console.log('Entered', event.item.data);
   }
 }
