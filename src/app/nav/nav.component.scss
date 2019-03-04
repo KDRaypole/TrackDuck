@@ -1,5 +1,13 @@
 mat-toolbar {
     padding-left: 28px;
+    img {
+        max-width: 50px;
+        max-height: 50px;
+    }
+    span {
+        color: white;
+        padding-left: 10px;
+    }
 }
 
 .sidenav-container {
