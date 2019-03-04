@@ -1,5 +1,6 @@
 <div class="row">
-  <div class="col-sm-3">
+  <div class="col-lg-4">
+    <h1 class="column-header">Playlists</h1>
     <div class="scrollable-playlist">
       <mat-card *ngFor="let playlist of playlists" class="example-card">
         <mat-card-header>
@@ -16,7 +17,8 @@
       </mat-card>
     </div>
   </div>
-  <div class="col-sm-9">
+  <div class="col-lg-8">
+      <h1 class="column-header">Songs</h1>
     <div class="selected-playlist">
       <div *ngIf="!!tracks">
         <mat-card *ngFor="let track of tracks">

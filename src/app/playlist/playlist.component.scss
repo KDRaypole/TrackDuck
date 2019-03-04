@@ -1,9 +1,18 @@
+.row {
+  width: 100%;
+  padding-top: 10px;
+}
+
+.column-header {
+  text-align: center;
+}
+
 .example-card {
-  max-width: 400px;
+  //max-width: 40vw;
 }
 .scrollable-playlist {
-  max-width: 400px;
-  max-height: 720px;
+  //max-width: 40vw;
+  max-height: calc(100vh - 130px);
   overflow-y: scroll;
   margin: 0;
 }
@@ -27,6 +36,6 @@ mat-icon {
   text-align: center;
 }
 .selected-playlist {
-  max-height: 720px;
+  max-height: calc(100vh - 130px);
   overflow-y: scroll;
 }
