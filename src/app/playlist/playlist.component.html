@@ -2,10 +2,7 @@
   <div class="col-sm-4">
     <h1 class="column-header">Playlists</h1>
     <div class="scrollable-playlist">
-
-
       <mat-card
-        (cdkDropEntered)="entered($event)"
         *ngFor="let playlist of playlists"
         class="example-card">
 
@@ -26,19 +23,20 @@
   <div class="col-sm-8">
       <h1 class="column-header">Songs</h1>
     <div class="selected-playlist">
-      <h4>{{currentPlaylist.name}}</h4>
+      <h4 *ngIf="currentPlaylist">{{currentPlaylist.name}}</h4>
       <div
-      cdkDropList
-      class="track-list"
-      (cdkDropListDropped)="drop($event)"
-      *ngIf="!!tracks">
+        cdkDropList
+        class="track-list"
+        [cdkDropListData]="tracks"
+        (cdkDropListDropped)="drop($event)"
+        *ngIf="!!tracks">
 
         <mat-card class="track-box" *ngFor="let track of tracks" cdkDrag>
           <div class="custom-placeholder" *cdkDragPlaceholder></div>
-          <h6>
+          <h5>
             <strong>{{track.track.name}}</strong>
-          </h6>
-          <p style="display:inline;">
+          </h5>
+          <p>
             {{track.track.artists[0].name}}
           </p>
           <mat-icon (click)="removeTrack(user.id, track.track, currentPlaylist.id)" color="warn">clear</mat-icon>

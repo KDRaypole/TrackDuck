@@ -51,10 +51,20 @@ export class PlaylistComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
+    this.reorderPlaylistTracks(this.tracks, event.previousIndex, event.currentIndex);
     moveItemInArray(this.tracks, event.previousIndex, event.currentIndex);
   }
 
-  entered(event: CdkDragEnter<string[]>) {
-   console.log('Entered', event.item.data);
+  private reorderPlaylistTracks(tracks, previousIndex, currentIndex) {
+    if (previousIndex < currentIndex) {
+      currentIndex += 1
+    }
+    this._spotify.reorderPlaylistTracks(this.user.id, this.currentPlaylist.id, {range_start: previousIndex, insert_before: currentIndex})
+      .subscribe(data => {
+        this._spotify.getPlaylistTracks(this.user.id, this.currentPlaylist.id, {snapshot_id: data.snapshot_id})
+          .subscribe(data => {
+            this.tracks = data.items
+          })
+      })
   }
 }
