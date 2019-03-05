@@ -9,8 +9,8 @@ import { CdkDragEnter, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-dr
   styleUrls: ['./playlist.component.scss']
 })
 export class PlaylistComponent implements OnInit {
-  private user: Object;
-  private currentPlaylist: Object;
+  private user: any;
+  private currentPlaylist: any;
   private playlists: any[];
   private tracks: any[];
 
