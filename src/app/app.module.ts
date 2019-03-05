@@ -4,17 +4,17 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavComponent } from './nav/nav.component';
+import { NavComponent } from './components/nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatSlideToggleModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { SpotifyService } from './services/spotify/spotify.service';
 import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { HttpModule } from '@angular/http';
-import { CallbackComponent } from './callback/callback.component';
-import { PlaylistComponent } from './playlist/playlist.component'
+import { CallbackComponent } from './components/callback/callback.component';
+import { PlaylistComponent } from './components/playlist/playlist.component'
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { SettingsComponent } from './settings/settings.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 
 @NgModule({

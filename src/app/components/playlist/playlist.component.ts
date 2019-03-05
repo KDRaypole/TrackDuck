@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SpotifyService } from '../services/spotify/spotify.service';
+import { SpotifyService } from '../../services/spotify/spotify.service';
 import { Promise } from 'es6-promise';
 import { CdkDragEnter, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
