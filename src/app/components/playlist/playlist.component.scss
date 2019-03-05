@@ -1,79 +1,82 @@
 .row {
-  width: 100%;
-  padding-top: 10px;
+    width: 100%;
+    padding-top: 10px;
 }
 
 .column-header {
-  text-align: center;
-}
-
-.example-card {
-  //max-width: 40vw;
-}
-.scrollable-playlist {
-  //max-width: 40vw;
-  max-height: calc(100vh - 130px);
-  overflow-y: scroll;
-  margin: 0;
-}
-mat-card {
-  margin: 10px;
-}
-mat-card-actions {
-  form {
-    display: inline;
-  }
-}
-mat-icon {
-  cursor: pointer;
-  float: right;
-  margin-top: -13px;
-  margin-right: -13px;
-  margin-bottom: -13px;
-  margin-left: -13px;
-}
-.no-tracks {
-  text-align: center;
-}
-.selected-playlist {
-  max-height: calc(100vh - 130px);
-  overflow-y: scroll;
-
-  h4 {
-    padding-top: 10px;
     text-align: center;
-  }
 }
+
+.scrollable-playlist {
+    max-height: calc(100vh - 130px);
+    overflow-y: scroll;
+    margin: 0;
+}
+
+mat-card {
+    margin: 10px;
+}
+
+mat-card-actions {
+    form {
+        display: inline;
+    }
+}
+
+mat-icon {
+    cursor: pointer;
+    float: right;
+    margin-top: -13px;
+    margin-right: -13px;
+    margin-bottom: -13px;
+    margin-left: -13px;
+}
+
+.no-tracks {
+    text-align: center;
+}
+
+.selected-playlist {
+    max-height: calc(100vh - 130px);
+    overflow-y: scroll;
+    h4 {
+        padding-top: 10px;
+        text-align: center;
+    }
+}
+
 .cdk-drag-preview {
-  box-sizing: border-box;
-  border-radius: 4px;
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-              0 8px 10px 1px rgba(0, 0, 0, 0.14),
-              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
 .cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
-.track-box {
-  cursor: move;
-}
-.track-box:last-child {
-  border: none;
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.track-list {
+.track-box {
+    cursor: move;
+
+    p {
+      display: inline;
+      color: darken(white, 20%);
+    }
+}
+
+.track-box:last-child {
+    border: none;
 }
 
 .track-list.cdk-drop-list-dragging .track-box:not(.cdk-drag-placeholder) {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 .custom-placeholder {
-  margin: 10px;
-  background: #ccc;
-  border: dotted 3px #999;
-  min-height: 80px;
-  border-radius: 5px;
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+    margin: 10px;
+    background: #ccc;
+    border: dotted 3px #999;
+    min-height: 90px;
+    border-radius: 5px;
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
