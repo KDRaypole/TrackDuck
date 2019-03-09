@@ -20,6 +20,7 @@ export interface SpotifyOptions {
   offset?: number,
   market?: string,
   album_type?: string,
+  access_token?: string,
   country?: string,
   type?: string,
   q?: string,
@@ -481,6 +482,7 @@ export class SpotifyService {
     options = options || {};
     options.q = q;
     options.type = type;
+    options.access_token = this.config.authToken;
 
     return this.api({
       method: 'get',

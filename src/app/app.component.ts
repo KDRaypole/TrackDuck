@@ -18,5 +18,4 @@ import { spotifyConfig } from '../config'
   ]
 })
 export class AppComponent {
-  title = 'TrackDuck';
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../../services/spotify/spotify.service';
 import { Promise } from 'es6-promise';
 import { CdkDragEnter, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { MatCheckboxModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { NewPlaylistComponent } from '../new-playlist/new-playlist.component';
 
 @Component({
   selector: 'app-playlist',
@@ -13,8 +15,13 @@ export class PlaylistComponent implements OnInit {
   private currentPlaylist: any;
   private playlists: any[];
   private tracks: any[];
+  private searchTracks: any[];
+  private searchPlaylists: any[];
+  private searchAlbums: any[];
+  private searchArtists: any[];
+  private newPlaylistTitle: any;
 
-  constructor(private _spotify: SpotifyService) {
+  constructor(private _spotify: SpotifyService, public dialog: MatDialog, public snackBar: MatSnackBar) {
     this._spotify.getCurrentUser().subscribe(data => {
         this.user = data;
     }, err=> { console.log(err); });
@@ -24,9 +31,29 @@ export class PlaylistComponent implements OnInit {
     this.getPlaylists()
   }
 
+  addTrackToSelectedPlaylists(track_id) {
+    this.playlists.filter(_ => _.selected).forEach(playlist => {
+      this._spotify.addPlaylistTracks(this.user.id, playlist.id, [track_id], {position: 0})
+        .subscribe(data => {
+          this.snackBar.open("Track added!", "close", {
+            duration: 1000,
+            panelClass: 'dark-snackbar'
+          });
+
+          if (playlist.id == this.currentPlaylist.id) {
+            this._spotify.getPlaylistTracks(this.user.id, playlist.id, {snapshot_id: data.snapshot_id})
+              .subscribe(data => {
+                this.tracks = data.items
+              })
+          }
+        })
+    })
+  }
+
   getPlaylists() {
     this._spotify.getCurrentUserPlaylists()
       .subscribe(data => {
+        console.log(data.items)
         this.playlists = data.items
       })
   }
@@ -51,9 +78,60 @@ export class PlaylistComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    this.reorderPlaylistTracks(this.tracks, event.previousIndex, event.currentIndex);
-    moveItemInArray(this.tracks, event.previousIndex, event.currentIndex);
+    if (this.currentPlaylist && this.currentPlaylist.public) {
+      this.reorderPlaylistTracks(this.tracks, event.previousIndex, event.currentIndex);
+      moveItemInArray(this.tracks, event.previousIndex, event.currentIndex);
+    } else {
+      console.log("Cannot change private playlists")
+    }
   }
+
+  search(q) {
+    this._spotify.search(q, "track,album,artist,playlist", {limit: 3, market: 'from_token'})
+      .subscribe(data => {
+        console.log(data)
+        this.searchTracks = data.tracks.items
+        this.searchPlaylists = data.playlists.items
+      })
+  }
+
+  newPlaylistDialog() {
+    const dialogRef = this.dialog.open(NewPlaylistComponent, {
+      width: '33%',
+      data: {playlistTitle: this.newPlaylistTitle}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.createNewPlaylist(result)
+      }
+    })
+  }
+
+  createNewPlaylist(name) {
+    this._spotify.createPlaylist(this.user.id, {name: name, public: true})
+      .subscribe(data => {
+        this.getPlaylists()
+      })
+  }
+
+  getUserLibrary() {
+    this._spotify.getSavedUserTracks({limit: 50})
+      .subscribe(data => {
+        this.tracks = data.items
+        this.currentPlaylist = ""
+      })
+  }
+
+  deletePlaylist(user_id, playlist) {
+    if(window.confirm('Are sure you want to delete this item ?')){
+      this._spotify.unfollowPlaylist(user_id, playlist.id)
+        .subscribe(data => {
+          this.getPlaylists()
+        })
+      }
+  }
+
 
   private reorderPlaylistTracks(tracks, previousIndex, currentIndex) {
     if (previousIndex < currentIndex) {
