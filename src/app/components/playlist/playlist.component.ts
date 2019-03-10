@@ -4,6 +4,7 @@ import { Promise } from 'es6-promise';
 import { CdkDragEnter, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatCheckboxModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { NewPlaylistComponent } from '../new-playlist/new-playlist.component';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-playlist',
@@ -132,6 +133,12 @@ export class PlaylistComponent implements OnInit {
       }
   }
 
+  subscribeToPlaylist(user_id, playlist) {
+    this._spotify.followPlaylist(user_id, playlist.id, playlist.public)
+      .subscribe(data => {
+        this.getPlaylists()
+      })
+  }
 
   private reorderPlaylistTracks(tracks, previousIndex, currentIndex) {
     if (previousIndex < currentIndex) {

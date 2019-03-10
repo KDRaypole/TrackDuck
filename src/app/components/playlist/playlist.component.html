@@ -114,8 +114,15 @@
 
       <h3 *ngIf="searchPlaylists">Playlists</h3>
       <mat-card class="search-results-playlist" *ngFor="let playlist of searchPlaylists">
-        <h5>{{playlist.name}}</h5>
-        <button (click)="getPlaylistsSongs(user.id, playlist)" mat-button>OPEN</button>
+        <div class="playlist-title">
+          <h5>{{playlist.name}}</h5>
+        </div>
+        <div class="playlist-actions">
+          <button (click)="getPlaylistsSongs(user.id, playlist)" mat-button>OPEN</button>
+          <button mat-icon-button color="primary">
+            <mat-icon (click)="subscribeToPlaylist(user.id, playlist)">add</mat-icon>
+          </button>
+        </div>
       </mat-card>
     </div>
   </div>
