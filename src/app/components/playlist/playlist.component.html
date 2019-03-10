@@ -6,7 +6,7 @@
 </mat-toolbar>
 
 <div class="row">
-  <div class="col-sm-4">
+  <div class="col-sm-3">
     <div class="scrollable-playlist">
       <mat-card class="my-library-card">
         <h4>My Library</h4>
@@ -27,11 +27,8 @@
         </mat-card-header>
         <img *ngIf="playlist.images[0]" mat-card-image src={{playlist.images[0].url}} alt="">
         <img *ngIf="!playlist.images[0]" mat-card-image src="../../assets/img/logo.png" alt="">
-        <mat-card-actions>
+        <mat-card-actions class="playlist-actions">
           <button (click)="getPlaylistsSongs(user.id, playlist)" mat-button>OPEN</button>
-          <form action={{playlist.external_urls.spotify}} method="get" target="_blank">
-             <button color="primary" mat-button target="_blank">ON SPOTIFY</button>
-          </form>
           <button color="warn" (click)="deletePlaylist(user.id, playlist)" mat-button>DELETE</button>
         </mat-card-actions>
       </mat-card>
@@ -41,7 +38,7 @@
     </div>
   </div>
 
-  <div class="col-sm-4">
+  <div class="col-sm-6">
     <div class="selected-playlist">
       <h4 *ngIf="currentPlaylist">{{currentPlaylist.name}}</h4>
       <div
@@ -52,6 +49,7 @@
         *ngIf="!!tracks">
 
         <mat-card class="track-box" *ngFor="let track of tracks" cdkDrag>
+          <mat-progress-bar color="primary" mode="determinate" [value]="track.track.popularity"></mat-progress-bar>
           <div class="custom-placeholder" *cdkDragPlaceholder></div>
           <div class="track-box-contents">
             <div class="add-song">
@@ -86,10 +84,11 @@
     </div>
   </div>
 
-  <div class="col-sm-4">
+  <div class="col-sm-3">
     <div class="search-results">
       <h3 *ngIf="searchTracks">Tracks</h3>
       <mat-card class="track-box" *ngFor="let track of searchTracks">
+        <mat-progress-bar color="primary" mode="determinate" [value]="track.popularity"></mat-progress-bar>
         <div class="track-box-contents">
           <div class="add-song">
             <button mat-icon-button color="primary">

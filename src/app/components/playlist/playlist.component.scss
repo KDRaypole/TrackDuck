@@ -102,6 +102,7 @@ mat-card-actions {
 .track-box {
   cursor: move;
   position: relative;
+  padding: 0;
 
   p {
     display: inline;
@@ -113,6 +114,7 @@ mat-card-actions {
     align-items: center;
     justify-content: space-between;
     position: relative;
+    padding: 10px;
 
     .track-info {
       align-items: center;
@@ -139,6 +141,17 @@ mat-card-actions {
       align-items: center;
     }
   }
+}
+
+.playlist-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+mat-progress-bar {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 .track-box:last-child {
