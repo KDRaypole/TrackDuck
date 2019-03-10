@@ -539,6 +539,10 @@ export class SpotifyService {
     }).map(res => res.json());
   }
 
+  resetAuthToken() {
+    this.config.authToken = '';
+  }
+
   login() {
     var promise = new Promise((resolve, reject) => {
       var w = 400,

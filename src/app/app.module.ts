@@ -18,6 +18,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { NewPlaylistComponent } from './components/new-playlist/new-playlist.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormsModule } from '@angular/forms';
+import { spotifyConfig } from '../config'
 
 @NgModule({
   declarations: [
@@ -53,7 +54,20 @@ import { FormsModule } from '@angular/forms';
   entryComponents: [
     NewPlaylistComponent
   ],
-  providers: [AuthGuardService, SpotifyService, HttpModule, DragDropModule],
+  providers: [
+   SpotifyService, {
+     provide: "SpotifyConfig" ,
+        useValue: {
+          clientId: spotifyConfig.fire.clientId,
+          redirectUri: 'http://localhost:4200/login/callback',
+          scope: 'playlist-modify-private playlist-modify-public user-follow-modify user-follow-read playlist-read-private playlist-read-collaborative playlist-modify-public playlist-modify-private user-library-read user-library-modify user-read-private user-top-read user-read-recently-played',
+          authToken: localStorage.getItem('spotify-token')
+        }
+   },
+   AuthGuardService,
+   HttpModule,
+   DragDropModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

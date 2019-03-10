@@ -68,11 +68,16 @@ mat-card {
 .my-library-card {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 mat-card-actions {
     form {
         display: inline;
+    }
+
+    button {
+      margin: 5px !important;
     }
 }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SpotifyService } from '../../services/spotify/spotify.service'
 
 @Component({
   selector: 'app-settings',
@@ -8,13 +9,13 @@ import { Router } from '@angular/router';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private _spotify: SpotifyService) { }
 
   ngOnInit() {
   }
 
   logout(){
-    localStorage.removeItem('spotify-token')
+    this._spotify.resetAuthToken();
     this.router.navigate(["login"]);
   }
 
