@@ -1,3 +1,17 @@
+@mixin md-icon-size($size: 24px) {
+    font-size: $size;
+    height: $size;
+    width: $size;
+    line-height: $size;
+  }
+
+#track-info{
+    display: inline-block;
+    width: 70%;
+    margin: auto;
+    margin-left: 36px;
+}
+
 .row {
     width: 100%;
     padding-top: 10px;
@@ -23,14 +37,24 @@ mat-card-actions {
     }
 }
 
-mat-icon {
+mat-icon{
     cursor: pointer;
-    float: right;
-    margin-top: -13px;
-    margin-right: -13px;
-    margin-bottom: -13px;
-    margin-left: -13px;
 }
+
+mat-icon.clear-button {
+    float: right;
+
+}
+
+mat-icon.play-button{
+    height: 55px;
+    @include md-icon-size(50px);
+}
+
+mat-icon.play-button:hover{
+    background-color: transparent;
+}
+
 
 .no-tracks {
     text-align: center;

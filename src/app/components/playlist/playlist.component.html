@@ -33,13 +33,21 @@
 
         <mat-card class="track-box" *ngFor="let track of tracks" cdkDrag>
           <div class="custom-placeholder" *cdkDragPlaceholder></div>
-          <h5>
-            <strong>{{track.track.name}}</strong>
-          </h5>
-          <p>
-            {{track.track.artists[0].name}}
-          </p>
-          <mat-icon (click)="removeTrack(user.id, track.track, currentPlaylist.id)" color="warn">clear</mat-icon>
+         
+          <span>
+            <mat-icon class="play-button">play_circle_outline</mat-icon>    
+          </span>
+
+          <div id= "track-info">
+            <h5>
+              <strong>{{track.track.name}}</strong>
+            </h5>
+            <p>
+              {{track.track.artists[0].name}}
+            </p>
+          </div>
+
+          <mat-icon class="clear-button" (click)="removeTrack(user.id, track.track, currentPlaylist.id)" color="warn">clear</mat-icon>
         </mat-card>
       </div>
       <div class="no-tracks" *ngIf="!tracks">
