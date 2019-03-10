@@ -29,6 +29,7 @@ export class PlaylistComponent implements OnInit {
 
   ngOnInit() {
     this.getPlaylists()
+    this.getUserLibrary()
   }
 
   addTrackToSelectedPlaylists(track_id) {
@@ -87,9 +88,8 @@ export class PlaylistComponent implements OnInit {
   }
 
   search(q) {
-    this._spotify.search(q, "track,album,artist,playlist", {limit: 3, market: 'from_token'})
+    this._spotify.search(q, "track,playlist", {limit: 6, market: 'from_token'})
       .subscribe(data => {
-        console.log(data)
         this.searchTracks = data.tracks.items
         this.searchPlaylists = data.playlists.items
       })
