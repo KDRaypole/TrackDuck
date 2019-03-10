@@ -2,23 +2,59 @@ import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../../services/spotify/spotify.service';
 import { Promise } from 'es6-promise';
 import { CdkDragEnter, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { trigger,  state,  style,  animate,  transition} from '@angular/animations';
+
 
 @Component({
   selector: 'app-playlist',
   templateUrl: './playlist.component.html',
-  styleUrls: ['./playlist.component.scss']
+  styleUrls: ['./playlist.component.scss'],
+  animations: [
+    trigger('showHide', [
+      // ...
+      state('show', style({
+        display: 'inline-block'
+      })),
+      state('hide', style({
+        display: 'none'
+      })),
+    ]),
+  ],
 })
 export class PlaylistComponent implements OnInit {
   private user: any;
   private currentPlaylist: any;
   private playlists: any[];
   private tracks: any[];
+  private isShown: boolean = true;
 
   constructor(private _spotify: SpotifyService) {
     this._spotify.getCurrentUser().subscribe(data => {
         this.user = data;
     }, err=> { console.log(err); });
+    
+
   }
+toggle(){
+  this.isShown=!this.isShown;
+  console.log(this.isShown);
+
+}
+
+/*
+  checkForPlayer(){
+    if (window.onSpotifyWebPlaybackSDKReady !== null) {
+      this.player = new window.Spotify.Player({
+        name: "Matt's Spotify Player",
+        getOAuthToken: cb => { cb(token); },
+      });
+      // this.createEventHandlers();
+  
+      // finally, connect!
+      this.player.connect();
+    }
+  }
+  */
 
   ngOnInit() {
     this.getPlaylists()
