@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 import { spotifyConfig } from '../config';
 import { PublicComponent } from './layouts/public/public.component';
 import { SecureComponent } from './layouts/secure/secure.component';
+import { PublicNavComponent } from './components/public-nav/public-nav.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { SecureComponent } from './layouts/secure/secure.component';
     SettingsComponent,
     NewPlaylistComponent,
     PublicComponent,
-    SecureComponent
+    SecureComponent,
+    PublicNavComponent
   ],
   imports: [
     BrowserModule,
