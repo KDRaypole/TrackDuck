@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   private user: Object;
@@ -32,9 +32,9 @@ export class LoginComponent implements OnInit {
         console.log(token);
 
         this._spotify.getCurrentUser()
-            .subscribe(data=> { 
-               console.log("getCurrentUser: ", data); 
-               this.user = data 
+            .subscribe(data=> {
+               console.log("getCurrentUser: ", data);
+               this.user = data
                this.router.navigate(["playlist"]);
             },
             err=> console.error(err));
@@ -42,13 +42,5 @@ export class LoginComponent implements OnInit {
     },
     err => console.error(err),
     () => { });
-  }
-
-  getPlaylists() {
-    this._spotify.getCurrentUserPlaylists()
-      .subscribe(data => {
-        console.log(data.items)
-        this.playlists = data.items
-      })
   }
 }

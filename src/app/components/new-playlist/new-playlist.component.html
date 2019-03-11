@@ -1,0 +1,11 @@
+<h3>
+  What shall we call it?
+</h3>
+<mat-form-field>
+  <input [(ngModel)]="data.playlistTitle" matInput placeholder="Awesome Playlist #42?">
+</mat-form-field>
+
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.playlistTitle" (click)="submit()">Submit</button>
+</div>

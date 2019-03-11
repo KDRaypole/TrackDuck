@@ -1,27 +1,44 @@
+<mat-toolbar color="primary">
+  <div class="input-container">
+    <input class="search-field" (keyup.enter)="search(value)" [(ngModel)]="value" matInput placeholder="Search" value="">
+    <div class="search"></div>
+  </div>
+</mat-toolbar>
+
 <div class="row">
-  <div class="col-sm-4">
-    <h1 class="column-header">Playlists</h1>
+  <div class="col-sm-3">
     <div class="scrollable-playlist">
+      <mat-card class="my-library-card">
+        <h4>My Library</h4>
+        <button (click)="getUserLibrary()" mat-button>OPEN</button>
+      </mat-card>
       <mat-card
         *ngFor="let playlist of playlists"
         class="example-card">
 
         <mat-card-header>
-          <mat-card-title></mat-card-title>
-          <mat-card-subtitle>{{playlist.name}}</mat-card-subtitle>
+          <mat-card-title>
+            {{playlist.name}}
+          </mat-card-title>
+          <mat-icon *ngIf="!playlist.public">lock</mat-icon>
+          <div [attr.data-playlist-id]="playlist.id" *ngIf="playlist.public" class="js-playlist-id">
+            <mat-checkbox [(ngModel)]="playlist.selected" color="primary"></mat-checkbox>
+          </div>
         </mat-card-header>
-        <img mat-card-image src={{playlist.images[0].url}} alt="">
-        <mat-card-actions>
+        <img *ngIf="playlist.images[0]" mat-card-image src={{playlist.images[0].url}} alt="">
+        <img *ngIf="!playlist.images[0]" mat-card-image src="../../assets/img/logo.png" alt="">
+        <mat-card-actions class="playlist-actions">
           <button (click)="getPlaylistsSongs(user.id, playlist)" mat-button>OPEN</button>
-          <form action={{playlist.external_urls.spotify}} method="get" target="_blank">
-             <button color="primary" mat-button target="_blank" >ON SPOTIFY</button>
-          </form>
+          <button color="warn" (click)="deletePlaylist(user.id, playlist)" mat-button>DELETE</button>
         </mat-card-actions>
+      </mat-card>
+      <mat-card (click)="newPlaylistDialog()" class="add-playlist">
+        <mat-icon color="primary">add_circle</mat-icon>
       </mat-card>
     </div>
   </div>
-  <div class="col-sm-8">
-      <h1 class="column-header">Songs</h1>
+
+  <div class="col-sm-6">
     <div class="selected-playlist">
       <h4 *ngIf="currentPlaylist">{{currentPlaylist.name}}</h4>
       <div
@@ -32,14 +49,31 @@
         *ngIf="!!tracks">
 
         <mat-card class="track-box" *ngFor="let track of tracks" cdkDrag>
+          <mat-progress-bar color="primary" mode="determinate" [value]="track.track.popularity"></mat-progress-bar>
           <div class="custom-placeholder" *cdkDragPlaceholder></div>
-          <h5>
-            <strong>{{track.track.name}}</strong>
-          </h5>
-          <p>
-            {{track.track.artists[0].name}}
-          </p>
-          <mat-icon (click)="removeTrack(user.id, track.track, currentPlaylist.id)" color="warn">clear</mat-icon>
+          <div class="track-box-contents">
+            <div class="add-song">
+              <button mat-icon-button color="primary">
+                <mat-icon (click)="addTrackToSelectedPlaylists(track.track.id)" class="">add</mat-icon>
+              </button>
+            </div>
+            <div class="track-info">
+              <h5>
+                <strong>{{track.track.name}}</strong>
+              </h5>
+              <p>
+                {{track.track.artists[0].name}}
+                <span *ngIf="track.track.artists[1]">
+                  & {{track.track.artists[1].name}}
+                </span>
+              </p>
+            </div>
+            <div class="remove-song">
+              <button *ngIf="currentPlaylist.public" class="" mat-icon-button color="warn">
+                <mat-icon (click)="removeTrack(user.id, track.track, currentPlaylist.id)">clear</mat-icon>
+              </button>
+            </div>
+          </div>
         </mat-card>
       </div>
       <div class="no-tracks" *ngIf="!tracks">
@@ -47,6 +81,48 @@
           No tracks available.
         </h3>
       </div>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="search-results">
+      <h3 *ngIf="searchTracks">Tracks</h3>
+      <mat-card class="track-box" *ngFor="let track of searchTracks">
+        <mat-progress-bar color="primary" mode="determinate" [value]="track.popularity"></mat-progress-bar>
+        <div class="track-box-contents">
+          <div class="add-song">
+            <button mat-icon-button color="primary">
+              <mat-icon (click)="addTrackToSelectedPlaylists(track.id)" class="">add</mat-icon>
+            </button>
+          </div>
+          <div class="track-info">
+            <h5>
+              <strong>{{track.name}}</strong>
+            </h5>
+            <p>
+              {{track.artists[0].name}}
+              <span *ngIf="track.artists[1]">
+                & {{track.artists[1].name}}
+              </span>
+            </p>
+          </div>
+          <div class="remove-song">
+          </div>
+        </div>
+      </mat-card>
+
+      <h3 *ngIf="searchPlaylists">Playlists</h3>
+      <mat-card class="search-results-playlist" *ngFor="let playlist of searchPlaylists">
+        <div class="playlist-title">
+          <h5>{{playlist.name}}</h5>
+        </div>
+        <div class="playlist-actions">
+          <button (click)="getPlaylistsSongs(user.id, playlist)" mat-button>OPEN</button>
+          <button mat-icon-button color="primary">
+            <mat-icon (click)="subscribeToPlaylist(user.id, playlist)">add</mat-icon>
+          </button>
+        </div>
+      </mat-card>
     </div>
   </div>
 </div>

@@ -5,27 +5,19 @@ import { CallbackComponent } from './components/callback/callback.component'
 import { PlaylistComponent } from './components/playlist/playlist.component'
 import { SettingsComponent } from './components/settings/settings.component'
 import { AuthGuardService } from './services/auth-guard/auth-guard.service';
+import { PublicComponent } from './layouts/public/public.component'
+import { SecureComponent } from './layouts/secure/secure.component'
+import { PUBLIC_ROUTES } from './public.routes'
+import { SECURE_ROUTES } from './secure.routes'
 
-const routes: Routes = [
-  {
-    path: '', redirectTo: '/playlist', pathMatch: 'full'
-  },
-  {
-    path: 'login', component: LoginComponent
-  },
-  {
-    path: 'login/callback', component: CallbackComponent
-  },
-  {
-    path: 'playlist', component: PlaylistComponent, canActivate: [AuthGuardService]
-  },
-  {
-    path: 'settings', component: SettingsComponent, canActivate: [AuthGuardService]
-  }
+const APP_ROUTES: Routes = [
+    { path: '', redirectTo: '/playlist', pathMatch: 'full', },
+    { path: '', component: PublicComponent, children: PUBLIC_ROUTES },
+    { path: '', component: SecureComponent, canActivate: [AuthGuardService], children: SECURE_ROUTES }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(APP_ROUTES)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

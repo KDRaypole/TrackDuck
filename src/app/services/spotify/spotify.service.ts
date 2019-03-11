@@ -20,6 +20,7 @@ export interface SpotifyOptions {
   offset?: number,
   market?: string,
   album_type?: string,
+  access_token?: string,
   country?: string,
   type?: string,
   q?: string,
@@ -99,12 +100,15 @@ export class SpotifyService {
     }).map(res => res.json());
   }
 
-  getArtistTopTracks(artist: string, country: string) {
+  getArtistTopTracks(artist: string, country: string, options?: SpotifyOptions) {
+    options = options || {};
     artist = this.getIdFromUri(artist);
+    options.access_token = this.config.authToken;
+    options.country = country;
     return this.api({
       method: 'get',
       url: `/artists/${artist}/top-tracks`,
-      search: { country: country }
+      search: options
     }).map(res => res.json());
   }
 
@@ -481,6 +485,7 @@ export class SpotifyService {
     options = options || {};
     options.q = q;
     options.type = type;
+    options.access_token = this.config.authToken;
 
     return this.api({
       method: 'get',
@@ -532,6 +537,10 @@ export class SpotifyService {
       search: { ids: trackList.toString() },
       headers: this.getHeaders()
     }).map(res => res.json());
+  }
+
+  resetAuthToken() {
+    this.config.authToken = '';
   }
 
   login() {
