@@ -18,7 +18,9 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { NewPlaylistComponent } from './components/new-playlist/new-playlist.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormsModule } from '@angular/forms';
-import { spotifyConfig } from '../config'
+import { spotifyConfig } from '../config';
+import { PublicComponent } from './layouts/public/public.component';
+import { SecureComponent } from './layouts/secure/secure.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { spotifyConfig } from '../config'
     CallbackComponent,
     PlaylistComponent,
     SettingsComponent,
-    NewPlaylistComponent
+    NewPlaylistComponent,
+    PublicComponent,
+    SecureComponent
   ],
   imports: [
     BrowserModule,
