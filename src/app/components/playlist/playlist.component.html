@@ -57,6 +57,9 @@
                 <mat-icon (click)="addTrackToSelectedPlaylists(track.track.id)" class="">add</mat-icon>
               </button>
             </div>
+            <div class="album-image">
+              <img src="{{track.track.album.images[2].url}}" alt="">
+            </div>
             <div class="track-info">
               <h5>
                 <strong>{{track.track.name}}</strong>
@@ -94,6 +97,9 @@
             <button mat-icon-button color="primary">
               <mat-icon (click)="addTrackToSelectedPlaylists(track.id)" class="">add</mat-icon>
             </button>
+          </div>
+          <div class="album-image">
+            <img src="{{track.album.images[2].url}}" alt="">
           </div>
           <div class="track-info">
             <h5>
