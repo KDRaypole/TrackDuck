@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from './components/nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { LoginComponent } from './components/login/login.component';
-import { MatProgressBarModule, MatSnackBarModule, MatCheckboxModule, MatInputModule, MatDialogModule, MatSlideToggleModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
+import { MatTabsModule, MatProgressBarModule, MatSnackBarModule, MatCheckboxModule, MatInputModule, MatDialogModule, MatSlideToggleModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
 import { SpotifyService } from './services/spotify/spotify.service';
 import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { HttpModule } from '@angular/http';
@@ -55,6 +55,7 @@ import { PublicNavComponent } from './components/public-nav/public-nav.component
     MatCheckboxModule,
     MatSnackBarModule,
     MatProgressBarModule,
+    MatTabsModule,
     HttpModule
   ],
   entryComponents: [

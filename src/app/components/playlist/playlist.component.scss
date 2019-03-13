@@ -18,17 +18,17 @@
 }
 
 .album-image {
-  border: 1px solid black;
+  border: 1px solid #3FA23F;
   margin-right: 20px;
   margin-left: 15px;
-  width: 50px;
-  height: 50px;
+  min-width: 64px !important;
+  min-height: 50px !important;
   overflow: hidden;
   border-radius: 10px;
 
   img {
-    width: 50px;
-    height: 50px;
+    min-width: 50px !important;
+    min-height: 50px !important;
   }
 }
 
