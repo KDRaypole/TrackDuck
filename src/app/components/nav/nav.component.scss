@@ -1,5 +1,4 @@
 mat-toolbar {
-    padding-left: 28px;
     img {
         max-width: 50px;
         max-height: 50px;
@@ -15,16 +14,14 @@ mat-toolbar {
 }
 
 .sidenav {
-    width: 230px;
+    width: 200px;
     background-color: black;
 }
 
 #sidebar-nav {
     .mat-icon {
-        padding-left: 8px;
     }
     .text {
-        padding-left: 24px;
     }
 }
 

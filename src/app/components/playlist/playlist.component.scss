@@ -17,6 +17,21 @@
   width: 100%;
 }
 
+.album-image {
+  border: 1px solid #3FA23F;
+  margin-right: 20px;
+  margin-left: 15px;
+  min-width: 64px !important;
+  min-height: 50px !important;
+  overflow: hidden;
+  border-radius: 10px;
+
+  img {
+    min-width: 50px !important;
+    min-height: 50px !important;
+  }
+}
+
 .search-results {
     max-height: calc(100vh - 80px);
     overflow-y: scroll;
