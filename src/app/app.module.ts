@@ -22,6 +22,7 @@ import { spotifyConfig } from '../config';
 import { PublicComponent } from './layouts/public/public.component';
 import { SecureComponent } from './layouts/secure/secure.component';
 import { PublicNavComponent } from './components/public-nav/public-nav.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { PublicNavComponent } from './components/public-nav/public-nav.component
     NewPlaylistComponent,
     PublicComponent,
     SecureComponent,
-    PublicNavComponent
+    PublicNavComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

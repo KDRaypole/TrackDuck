@@ -21,7 +21,7 @@
   border: 1px solid #3FA23F;
   margin-right: 20px;
   margin-left: 15px;
-  min-width: 64px !important;
+  min-width: 50px !important;
   min-height: 50px !important;
   overflow: hidden;
   border-radius: 10px;
@@ -29,6 +29,8 @@
   img {
     min-width: 50px !important;
     min-height: 50px !important;
+    max-width: 50px !important;
+    max-height: 50px !important;
   }
 }
 
@@ -182,11 +184,21 @@ mat-progress-bar {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
+.artist-link {
+  border: none;
+  background-color: inherit;
+  color: #cccccc;
+}
+
+.artist-link:hover {
+  color: #3FA23F;
+}
+
 .custom-placeholder {
     margin: 10px;
     background: #ccc;
     border: dotted 3px #999;
-    min-height: 68px;
+    min-height: 88px;
     border-radius: 5px;
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
@@ -341,6 +353,12 @@ body {
       font-weight: bolder;
     }
   }
+}
+
+.search-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .dark-snackbar {

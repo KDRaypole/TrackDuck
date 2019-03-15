@@ -40,7 +40,8 @@
 
   <div class="col-sm-6">
     <div class="selected-playlist">
-      <h4 *ngIf="currentPlaylist">{{currentPlaylist.name}}</h4>
+      <mat-card *ngIf="!!currentPlaylist">{{currentPlaylist.name}}</mat-card>
+      <mat-card *ngIf="!currentPlaylist">My Library</mat-card>
       <div
         cdkDropList
         class="track-list"
@@ -58,16 +59,22 @@
               </button>
             </div>
             <div class="album-image">
-              <img src="{{track.track.album.images[2].url}}" alt="">
+              <img *ngIf="!!track.track.album.images[2]" src="{{track.track.album.images[2].url}}" alt="">
+              <img *ngIf="!track.track.album.images[2]" src="/assets/img/logo.png" alt="">
             </div>
             <div class="track-info">
               <h5>
                 <strong>{{track.track.name}}</strong>
               </h5>
               <p>
-                {{track.track.artists[0].name}}
+                <button class="artist-link" (click)="search(track.track.artists[0].name)">
+                  {{track.track.artists[0].name}}
+                </button>
                 <span *ngIf="track.track.artists[1]">
-                  & {{track.track.artists[1].name}}
+                  &
+                  <button class="artist-link" (click)="search(track.track.artists[1].name)">
+                   {{track.track.artists[1].name}}
+                  </button>
                 </span>
               </p>
             </div>
@@ -96,32 +103,44 @@
             Tracks
           </ng-template>
 
-          <mat-card class="track-box" *ngFor="let track of searchTracks">
-            <mat-progress-bar color="primary" mode="determinate" [value]="track.popularity"></mat-progress-bar>
-            <div class="track-box-contents">
-              <div class="add-song">
-                <button mat-icon-button color="primary">
-                  <mat-icon (click)="addTrackToSelectedPlaylists(track.id)" class="">add</mat-icon>
-                </button>
+          <div *ngIf="!!searchLoading" class="search-loading">
+            <img src="/assets/img/loading.svg" alt="">
+          </div>
+
+          <div *ngIf="!searchLoading">
+            <mat-card class="track-box" *ngFor="let track of searchTracks">
+              <mat-progress-bar color="primary" mode="determinate" [value]="track.popularity"></mat-progress-bar>
+              <div class="track-box-contents">
+                <div class="add-song">
+                  <button mat-icon-button color="primary">
+                    <mat-icon (click)="addTrackToSelectedPlaylists(track.id)" class="">add</mat-icon>
+                  </button>
+                </div>
+                <div class="album-image">
+                  <img *ngIf="!!track.album.images[2]" src="{{track.album.images[2].url}}" alt="">
+                  <img *ngIf="!track.album.images[2]" src="/assets/img/logo.png" alt="">
+                </div>
+                <div class="track-info">
+                  <h6>
+                    <strong>{{track.name}}</strong>
+                  </h6>
+                  <p>
+                    <button class="artist-link" (click)="search(track.artists[0].name)">
+                      {{track.artists[0].name}}
+                    </button>
+                    <span *ngIf="track.artists[1]">
+                      &
+                      <button class="artist-link" (click)="search(track.artists[1].name)">
+                        {{track.artists[1].name}}
+                      </button>
+                    </span>
+                  </p>
+                </div>
+                <div class="remove-song">
+                </div>
               </div>
-              <div class="album-image">
-                <img src="{{track.album.images[2].url}}" alt="">
-              </div>
-              <div class="track-info">
-                <h5>
-                  <strong>{{track.name}}</strong>
-                </h5>
-                <p>
-                  {{track.artists[0].name}}
-                  <span *ngIf="track.artists[1]">
-                    & {{track.artists[1].name}}
-                  </span>
-                </p>
-              </div>
-              <div class="remove-song">
-              </div>
-            </div>
-          </mat-card>
+            </mat-card>
+          </div>
         </mat-tab>
 
         <mat-tab label="Playlists">
@@ -130,17 +149,23 @@
             Playlist
           </ng-template>
 
-          <mat-card class="search-results-playlist" *ngFor="let playlist of searchPlaylists">
-            <div class="playlist-title">
-              <h5>{{playlist.name}}</h5>
-            </div>
-            <div class="playlist-actions">
-              <button (click)="getPlaylistsSongs(user.id, playlist)" mat-button>OPEN</button>
-              <button mat-icon-button color="primary">
-                <mat-icon (click)="subscribeToPlaylist(user.id, playlist)">add</mat-icon>
-              </button>
-            </div>
-          </mat-card>
+          <div *ngIf="!!searchLoading" class="search-loading">
+            <img src="/assets/img/loading.svg" alt="">
+          </div>
+
+          <div *ngIf="!searchLoading">
+            <mat-card class="search-results-playlist" *ngFor="let playlist of searchPlaylists">
+              <div class="playlist-title">
+                <h5>{{playlist.name}}</h5>
+              </div>
+              <div class="playlist-actions">
+                <button (click)="getPlaylistsSongs(user.id, playlist)" mat-button>OPEN</button>
+                <button mat-icon-button color="primary">
+                  <mat-icon (click)="subscribeToPlaylist(user.id, playlist)">add</mat-icon>
+                </button>
+              </div>
+            </mat-card>
+          </div>
         </mat-tab>
       </mat-tab-group>
     </div>

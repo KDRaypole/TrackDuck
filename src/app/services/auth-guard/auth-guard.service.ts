@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { CanActivate, Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { SpotifyService } from '../spotify/spotify.service'
 
@@ -12,15 +13,23 @@ export class AuthGuardService implements CanActivate {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    this._spotify.getCurrentUser()
-      .subscribe(data => {
-        this.user = data
-      })
-    if (this.user) {
+    
+
+    if (this.userLoggedIn()) {
       return true;
     } else {
       this.router.navigate(['/login']);
       return false;
     }
+  }
+
+  userLoggedIn(): Observable<boolean>{
+    return this._spotify.getCurrentUser().map(data => {
+      if(data) {
+        return true;
+      } else {
+        return false;
+      }
+    })
   }
 }

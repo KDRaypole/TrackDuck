@@ -1,6 +1,15 @@
-html, body { height: 100%; }
-body { margin: 0; }
+html, body {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
 
 button:focus {
   outline: none;
+}
+
+* {
 }

@@ -21,8 +21,12 @@ export class PlaylistComponent implements OnInit {
   private searchAlbums: any[];
   private searchArtists: any[];
   private newPlaylistTitle: any;
+  private featuredPlaylists: any[];
+  private searchLoading: boolean;
+  private tracksLoading: boolean;
 
   constructor(private _spotify: SpotifyService, public dialog: MatDialog, public snackBar: MatSnackBar) {
+    this.searchLoading = false;
     this._spotify.getCurrentUser().subscribe(data => {
         this.user = data;
     }, err=> { console.log(err); });
@@ -31,6 +35,10 @@ export class PlaylistComponent implements OnInit {
   ngOnInit() {
     this.getPlaylists()
     this.getUserLibrary()
+    this._spotify.getFeaturedPlaylists()
+      .subscribe(data => {
+        this.featuredPlaylists = data.playlists.items
+      })
   }
 
   addTrackToSelectedPlaylists(track_id) {
@@ -90,11 +98,13 @@ export class PlaylistComponent implements OnInit {
   }
 
   search(q) {
-    this._spotify.search(q, "track,playlist", {limit: 6, market: 'from_token'})
+    this.searchLoading = true;
+    this._spotify.search(q, "track,playlist", {limit: 10, market: 'from_token'})
       .subscribe(data => {
         console.log(data)
         this.searchTracks = data.tracks.items
         this.searchPlaylists = data.playlists.items
+        this.searchLoading = false
       })
   }
 
