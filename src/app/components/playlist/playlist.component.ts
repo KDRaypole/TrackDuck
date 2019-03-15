@@ -47,7 +47,7 @@ export class PlaylistComponent implements OnInit {
         .subscribe(data => {
           this.snackBar.open("Track added!", "close", {
             duration: 1000,
-            panelClass: 'dark-snackbar'
+            panelClass: ['dark-snackbar']
           });
 
           if (playlist.id == this.currentPlaylist.id) {
@@ -93,7 +93,10 @@ export class PlaylistComponent implements OnInit {
       this.reorderPlaylistTracks(this.tracks, event.previousIndex, event.currentIndex);
       moveItemInArray(this.tracks, event.previousIndex, event.currentIndex);
     } else {
-      console.log("Cannot change private playlists")
+      this.snackBar.open("You cannot reorder a private playlist or your library", "close", {
+        duration: 1000,
+        panelClass: ['warn-snackbar']
+      });
     }
   }
 

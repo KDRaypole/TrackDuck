@@ -156,7 +156,7 @@
           <div *ngIf="!searchLoading">
             <mat-card class="search-results-playlist" *ngFor="let playlist of searchPlaylists">
               <div class="playlist-title">
-                <h5>{{playlist.name}}</h5>
+                <h6>{{playlist.name}}</h6>
               </div>
               <div class="playlist-actions">
                 <button (click)="getPlaylistsSongs(user.id, playlist)" mat-button>OPEN</button>

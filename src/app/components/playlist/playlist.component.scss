@@ -1,3 +1,5 @@
+@import '~@angular/material/theming';
+
 .row {
     width: 100%;
     padding-top: 10px;
@@ -361,6 +363,12 @@ body {
   justify-content: center;
 }
 
-.dark-snackbar {
-  background-color: #333333 !important;
+::ng-deep .dark-snackbar {
+  background: #3FA23F !important;
+  color: black !important;
+}
+
+::ng-deep .warn-snackbar {
+  background: #FB2407 !important;
+  color: black !important;
 }
