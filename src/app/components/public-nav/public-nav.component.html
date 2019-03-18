@@ -1,8 +1,11 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span><a routerLink="/"><img src="assets/img/logo.png" alt=""></a></span>
+    <a routerLink="/"><img src="assets/img/logo.png" alt="">
+      <span></span>
+      <span class="logo-title">TrackDuck</span>
+    </a>
     <span class="example-spacer"></span>
     <button mat-button>ABOUT</button>
-    <button mat-button>LOGIN</button>
+    <button routerLink="/login" mat-button>LOGIN</button>
   </mat-toolbar-row>
 </mat-toolbar>

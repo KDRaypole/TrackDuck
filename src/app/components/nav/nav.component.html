@@ -4,8 +4,10 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="!(isHandset$ | async)">
     <mat-toolbar>
+      <a routerLink="/">
         <img src="../../assets/img/logo.png">
-        <span>TrackDuck</span>
+      </a>
+      <span>TrackDuck</span>
     </mat-toolbar>
     <mat-nav-list id="sidebar-nav">
       <a mat-list-item routerLink="/playlist"><mat-icon aria-label="icon">queue_music</mat-icon><div class="text">Playlists</div></a>

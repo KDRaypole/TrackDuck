@@ -2,7 +2,6 @@ import { Injectable, Inject, Optional } from '@angular/core';
 import { Http, Headers, Response, Request } from '@angular/http'
 import { Observable } from 'rxjs/Observable';
 import { fromPromise } from 'rxjs/observable/fromPromise';
-import { spotifyConfig } from '../../../config';
 import { map } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';

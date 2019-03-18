@@ -11,7 +11,6 @@ import { PUBLIC_ROUTES } from './public.routes'
 import { SECURE_ROUTES } from './secure.routes'
 
 const APP_ROUTES: Routes = [
-    { path: '', redirectTo: '/playlist', pathMatch: 'full', },
     { path: '', component: PublicComponent, children: PUBLIC_ROUTES },
     { path: '', component: SecureComponent, canActivate: [AuthGuardService], children: SECURE_ROUTES }
 ];
