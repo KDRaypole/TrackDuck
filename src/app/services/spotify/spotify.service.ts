@@ -33,6 +33,12 @@ export interface SpotifyOptions {
   snapshot_id?: any,
 }
 
+export interface recommendedSeeds {
+  seed_artists: string,
+  seed_genres: string,
+  seed_tracks: string,
+}
+
 interface HttpRequestOptions {
   method?: string,
   url: string,
@@ -164,7 +170,7 @@ export class SpotifyService {
     }).map(res => res.json());
   }
 
-  getRecommendations(options?: SpotifyOptions) {
+  getRecommendations(options?: recommendedSeeds) {
       return this.api({
       method: 'get',
       url: `/recommendations`,

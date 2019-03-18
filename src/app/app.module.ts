@@ -23,6 +23,7 @@ import { PublicComponent } from './layouts/public/public.component';
 import { SecureComponent } from './layouts/secure/secure.component';
 import { PublicNavComponent } from './components/public-nav/public-nav.component';
 import { HomeComponent } from './components/home/home.component';
+import { RecommendedComponent } from './components/recommended/recommended.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { HomeComponent } from './components/home/home.component';
     PublicComponent,
     SecureComponent,
     PublicNavComponent,
-    HomeComponent
+    HomeComponent,
+    RecommendedComponent
   ],
   imports: [
     BrowserModule,
