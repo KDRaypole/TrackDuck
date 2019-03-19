@@ -9,6 +9,7 @@ import { SpotifyService } from '../../services/spotify/spotify.service';
 })
 export class RecommendedComponent implements OnInit {
   private user:any;
+  private featuredPlaylists:any[];
 
   constructor(private _spotify: SpotifyService) {
     this._spotify.getCurrentUser().subscribe(data => {
@@ -24,6 +25,7 @@ export class RecommendedComponent implements OnInit {
   getFeatured() {
     this._spotify.getFeaturedPlaylists()
       .subscribe(data => {
+        this.featuredPlaylists = data.playlists.items
         console.log(data.playlists.items)
       })
   }
@@ -47,7 +49,6 @@ export class RecommendedComponent implements OnInit {
         tracks.push(track.track.id)
         artists.push(track.track.artists[0].id)
       })
-      console.log(tracks)
       return {artists: "", genres: "acoustic, alternative, ambient, classical, dance", tracks: ""}
     })
   }
