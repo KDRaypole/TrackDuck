@@ -25,10 +25,12 @@
             <mat-checkbox [(ngModel)]="playlist.selected" color="primary"></mat-checkbox>
           </div>
         </mat-card-header>
+
         <div class="image-container" [attr.data-playlist-id]="playlist.id">
-          <img *ngIf="playlist.images[0]" mat-card-image src={{playlist.images[0].url}} alt="">
-          <img *ngIf="!playlist.images[0]" mat-card-image src="../../assets/img/logo.png" alt="">
+          <img *ngIf="playlist.images[0]" mat-card-image [src]="playlist.images[0].url" alt="">
+          <img *ngIf="!playlist.images[0]" mat-card-image [src]="../../assets/img/logo.png" alt="">
         </div>
+
         <mat-card-actions class="playlist-actions">
           <button (click)="getPlaylistsSongs(user.id, playlist)" mat-button>OPEN</button>
           <button color="warn" (click)="deletePlaylist(user.id, playlist)" mat-button>DELETE</button>
@@ -61,8 +63,7 @@
               </button>
             </div>
             <div class="album-image">
-              <img *ngIf="!!track.track.album.images[2]" src="{{track.track.album.images[2].url}}" alt="">
-              <img *ngIf="!track.track.album.images[2]" src="/assets/img/logo.png" alt="">
+              <img [src]="!!track.track.album.images[2] ? track.track.album.images[2].url : '/assets/img/logo.png'" alt="">
             </div>
             <div class="track-info">
               <h5>
@@ -119,8 +120,7 @@
                   </button>
                 </div>
                 <div class="album-image">
-                  <img *ngIf="!!track.album.images[2]" src="{{track.album.images[2].url}}" alt="">
-                  <img *ngIf="!track.album.images[2]" src="/assets/img/logo.png" alt="">
+                  <img [src]="!!track.album.images[2] ? track.album.images[2].url : '/assets/img/logo.png'" alt="">
                 </div>
                 <div class="track-info">
                   <h6>

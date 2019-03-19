@@ -9,11 +9,9 @@
         <h6>{{playlist.name}}</h6>
       </mat-card-title>
     </mat-card-header>
-    <img *ngIf="playlist.images[0]" mat-card-image src={{playlist.images[0].url}} alt="">
-    <img *ngIf="!playlist.images[0]" mat-card-image src="../../assets/img/logo.png" alt="">
+    <img mat-card-image [src]="!!playlist.images[0] ? playlist.images[0].url : '/assets/img/logo.png'" alt="">
     <mat-card-actions class="playlist-actions">
       <button (click)="getPlaylistsSongs(user.id, playlist)" mat-button>OPEN</button>
-      <button color="warn" (click)="deletePlaylist(user.id, playlist)" mat-button>DELETE</button>
     </mat-card-actions>
   </mat-card>
 </div>
