@@ -1,17 +1,99 @@
-<h1>Spotify Featured Playlists</h1>
-<div class="featured">
-  <mat-card
-    *ngFor="let playlist of featuredPlaylists"
-    class="playlist-card">
+<div class="fluid-container">
+  <h1>Spotify Featured Playlists</h1>
+  <div class="featured">
+    <mat-card
+      *ngFor="let playlist of featuredPlaylists"
+      class="playlist-card">
 
-    <mat-card-header>
-      <mat-card-title>
-        <h6>{{playlist.name}}</h6>
-      </mat-card-title>
-    </mat-card-header>
-    <img mat-card-image [src]="!!playlist.images[0] ? playlist.images[0].url : '/assets/img/logo.png'" alt="">
-    <mat-card-actions class="playlist-actions">
-      <button (click)="getPlaylistsSongs(user.id, playlist)" mat-button>OPEN</button>
-    </mat-card-actions>
-  </mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h6>{{playlist.name}}</h6>
+        </mat-card-title>
+      </mat-card-header>
+      <img mat-card-image [src]="!!playlist.images[0] ? playlist.images[0].url : '/assets/img/logo.png'" alt="">
+      <mat-card-actions class="playlist-actions">
+        <button (click)="getPlaylistsSongs(user.id, playlist)" mat-button>OPEN</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <h1>Recommended based on tracks you listen to</h1>
+
+  <div class="recommend-controls">
+    <form [formGroup]="form" action="">
+      <mat-card class="slider-container">
+        <div>
+          <h4>Loudness</h4>
+          <mat-slider
+            formControlName="loudness"
+            color="primary"
+            [displayWith]="dbLabel"
+            thumbLabel
+            max=0
+            min=-60
+            step=1>
+          </mat-slider>
+        </div>
+        <div>
+          <h4>Danceablility</h4>
+          <mat-slider
+            formControlName="danceability"
+            color="primary"
+            thumbLabel
+            max=1
+            min=0
+            step=0.1>
+          </mat-slider>
+        </div>
+        <div>
+          <h4>Energy</h4>
+          <mat-slider
+            formControlName="energy"
+            color="primary"
+            thumbLabel
+            max=1
+            min=0
+            step=0.1>
+          </mat-slider>
+        </div>
+        <div>
+          <h4>Positivity</h4>
+          <mat-slider
+            formControlName="positivity"
+            color="primary"
+            thumbLabel
+            max=1
+            min=0
+            step=0.1
+            >
+          </mat-slider>
+        </div>
+      </mat-card>
+    </form>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    <img src="/assets/img/loading_large.svg" alt="">
+  </div>
+
+  <div *ngIf="!loading" class="recommended">
+    <mat-card
+      *ngFor="let track of recommendedTracks"
+      class="track-card">
+
+      <mat-progress-bar color="primary" mode="determinate" [value]="track.popularity"></mat-progress-bar>
+      <div class="track-card-contents">
+        <mat-card-header>
+          <mat-card-title>
+            <h5>{{track.name}}</h5>
+            <h6>{{track.artists[0].name}}</h6>
+          </mat-card-title>
+        </mat-card-header>
+        <img mat-card-image [src]="!!track.album.images[0] ? track.album.images[0].url : '/assets/img/logo.png'" alt="">
+        <mat-card-actions class="playlist-actions">
+          <button mat-button>OPEN</button>
+        </mat-card-actions>
+      </div>
+    </mat-card>
+  </div>
 </div>
