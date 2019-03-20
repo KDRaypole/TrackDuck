@@ -1,5 +1,5 @@
 h1 {
-  margin: 10px 0px 0px 10px;
+  margin: 10px;
 }
 
 .fluid-container {
@@ -11,6 +11,79 @@ h1 {
   flex-direction: row;
   overflow-y: scroll;
   padding: 10px;
+}
+
+.album-image {
+  border: 1px solid #3FA23F;
+  margin-right: 20px;
+  margin-left: 15px;
+  min-width: 50px !important;
+  min-height: 50px !important;
+  overflow: hidden;
+  border-radius: 10px;
+
+  img {
+    min-width: 50px !important;
+    min-height: 50px !important;
+    max-width: 50px !important;
+    max-height: 50px !important;
+  }
+}
+
+.track-box {
+  margin: 10px auto;
+  position: relative;
+  min-width: 300px;
+  width: 60%;
+  padding: 0;
+
+  p {
+    display: inline;
+    color: darken(white, 20%);
+  }
+
+  .track-box-contents {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding: 10px;
+
+    .track-info {
+      align-items: center;
+      justify-content: flex-start !important;
+      min-width: 1px;
+      position: relative;
+      height: 100%;
+    }
+
+    .add-song {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 30px;
+      height: 100%;
+    }
+
+    .artist-link {
+      border: none;
+      background-color: inherit;
+      color: #cccccc;
+    }
+
+    .artist-link:hover {
+      color: #3FA23F;
+    }
+
+    .remove-song {
+      display: flex;
+      flex: 1 0 auto;
+      justify-content: flex-end;
+      height: 100%;
+      align-items: center;
+    }
+  }
 }
 
 .playlist-card {
@@ -32,6 +105,7 @@ mat-progress-bar {
 
 .track-card {
   min-width: 330px;
+  max-width: 400px;
   width: 20%;
   margin-right: 10px;
   margin-bottom: 10px;
@@ -60,10 +134,6 @@ mat-progress-bar {
 }
 
 .recommended {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 20px;
-  justify-content: center;
 }
 
 .slider-container {
@@ -75,4 +145,14 @@ mat-progress-bar {
   padding: 10px;
   margin: auto;
   text-align: center;
+}
+
+::ng-deep .dark-snackbar {
+  background: #3FA23F !important;
+  color: black !important;
+}
+
+::ng-deep .warn-snackbar {
+  background: #FB2407 !important;
+  color: black !important;
 }

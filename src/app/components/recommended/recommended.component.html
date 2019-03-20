@@ -1,5 +1,5 @@
 <div class="fluid-container">
-  <h1>Spotify Featured Playlists</h1>
+  <h2>Spotify Featured Playlists</h2>
   <div class="featured">
     <mat-card
       *ngFor="let playlist of featuredPlaylists"
@@ -17,7 +17,7 @@
     </mat-card>
   </div>
 
-  <h1>Recommended based on tracks you listen to</h1>
+  <h2>Recommended based on tracks you listen to</h2>
 
   <div class="recommend-controls">
     <form [formGroup]="form" action="">
@@ -77,22 +77,35 @@
   </div>
 
   <div *ngIf="!loading" class="recommended">
-    <mat-card
-      *ngFor="let track of recommendedTracks"
-      class="track-card">
-
+    <mat-card class="track-box" *ngFor="let track of recommendedTracks">
       <mat-progress-bar color="primary" mode="determinate" [value]="track.popularity"></mat-progress-bar>
-      <div class="track-card-contents">
-        <mat-card-header>
-          <mat-card-title>
-            <h5>{{track.name}}</h5>
-            <h6>{{track.artists[0].name}}</h6>
-          </mat-card-title>
-        </mat-card-header>
-        <img mat-card-image [src]="!!track.album.images[0] ? track.album.images[0].url : '/assets/img/logo.png'" alt="">
-        <mat-card-actions class="playlist-actions">
-          <button mat-button>OPEN</button>
-        </mat-card-actions>
+      <div class="track-box-contents">
+        <div class="add-song">
+          <button mat-icon-button color="primary">
+            <mat-icon (click)="addTrackToLibrary(track.uri)" class="">add</mat-icon>
+          </button>
+        </div>
+        <div class="album-image">
+          <img [src]="!!track.album.images[2] ? track.album.images[2].url : '/assets/img/logo.png'" alt="">
+        </div>
+        <div class="track-info">
+          <h5>
+            <strong>{{track.name}}</strong>
+          </h5>
+          <p>
+            <button class="artist-link" (click)="search(track.artists[0].name)">
+              {{track.artists[0].name}}
+            </button>
+            <span *ngIf="track.artists[1]">
+              &
+              <button class="artist-link" (click)="search(track.artists[1].name)">
+               {{track.artists[1].name}}
+              </button>
+            </span>
+          </p>
+        </div>
+        <div class="remove-song">
+        </div>
       </div>
     </mat-card>
   </div>

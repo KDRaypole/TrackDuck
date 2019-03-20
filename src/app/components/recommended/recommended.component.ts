@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SpotifyService } from '../../services/spotify/spotify.service';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-recommended',
@@ -16,7 +17,7 @@ export class RecommendedComponent implements OnInit {
   loading: boolean = false;
 
 
-  constructor(private _spotify: SpotifyService, private formBuilder: FormBuilder) {
+  constructor(private _spotify: SpotifyService, private formBuilder: FormBuilder, public snackBar: MatSnackBar) {
     this._spotify.getCurrentUser().subscribe(data => {
         this.user = data;
     }, err=> { console.log(err); });
@@ -39,6 +40,16 @@ export class RecommendedComponent implements OnInit {
     this._spotify.getFeaturedPlaylists()
       .subscribe(data => {
         this.featuredPlaylists = data.playlists.items
+      })
+  }
+
+  addTrackToLibrary(track_id) {
+    this._spotify.saveUserTracks([track_id])
+      .subscribe(data => {
+        this.snackBar.open("Track added to your library!", "close", {
+          duration: 5000,
+          panelClass: ['dark-snackbar']
+        });
       })
   }
 
