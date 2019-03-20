@@ -46,7 +46,7 @@ export class PlaylistComponent implements OnInit {
       this._spotify.addPlaylistTracks(this.user.id, playlist.id, [track_id], {position: 0})
         .subscribe(data => {
           this.snackBar.open("Track added!", "close", {
-            duration: 1000,
+            duration: 5000,
             panelClass: ['dark-snackbar']
           });
 
@@ -94,7 +94,7 @@ export class PlaylistComponent implements OnInit {
       moveItemInArray(this.tracks, event.previousIndex, event.currentIndex);
     } else {
       this.snackBar.open("You cannot reorder a private playlist or your library", "close", {
-        duration: 1000,
+        duration: 5000,
         panelClass: ['warn-snackbar']
       });
     }
