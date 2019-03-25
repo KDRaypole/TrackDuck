@@ -26,6 +26,9 @@ import { PublicNavComponent } from './components/public-nav/public-nav.component
 import { HomeComponent } from './components/home/home.component';
 import { RecommendedComponent } from './components/recommended/recommended.component';
 import { PlaylistPreviewComponent } from './components/playlist-preview/playlist-preview.component';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -65,6 +68,8 @@ import { PlaylistPreviewComponent } from './components/playlist-preview/playlist
     MatTabsModule,
     MatSliderModule,
     ReactiveFormsModule,
+    ScrollingModule,
+    InfiniteScrollModule,
     HttpModule
   ],
   entryComponents: [

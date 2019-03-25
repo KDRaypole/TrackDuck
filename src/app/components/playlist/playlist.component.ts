@@ -4,6 +4,7 @@ import { Promise } from 'es6-promise';
 import { CdkDragEnter, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatCheckboxModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { NewPlaylistComponent } from '../new-playlist/new-playlist.component';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import * as $ from 'jquery';
 
 @Component({
@@ -24,6 +25,8 @@ export class PlaylistComponent implements OnInit {
   private featuredPlaylists: any[];
   private searchLoading: boolean;
   private tracksLoading: boolean;
+  private offset?: number;
+  public direction = '';
 
   constructor(private _spotify: SpotifyService, public dialog: MatDialog, public snackBar: MatSnackBar) {
     this.searchLoading = false;
@@ -143,7 +146,7 @@ export class PlaylistComponent implements OnInit {
   }
 
   getUserLibrary() {
-    this._spotify.getSavedUserTracks({limit: 50})
+    this._spotify.getSavedUserTracks({limit: 50, offset: 0})
       .subscribe(data => {
         this.tracks = data.items
         this.currentPlaylist = ""
@@ -165,6 +168,16 @@ export class PlaylistComponent implements OnInit {
         this.getPlaylists()
       })
   }
+
+  onScrolled(ev){
+    console.log('down we go', ev);
+      this._spotify.getSavedUserTracks({limit: 50, offset: 49})
+        .subscribe(data => {
+          this.tracks = data.items
+          this.currentPlaylist = ""
+        })
+    this.direction = 'down'
+    }
 
   private reorderPlaylistTracks(tracks, previousIndex, currentIndex) {
     if (previousIndex < currentIndex) {
