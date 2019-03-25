@@ -4,6 +4,7 @@ h1 {
 
 .fluid-container {
   width: 100%;
+  padding: 10px;
 }
 
 .featured {
@@ -67,6 +68,7 @@ h1 {
     }
 
     .artist-link {
+      padding: 0;
       border: none;
       background-color: inherit;
       color: #cccccc;
@@ -141,7 +143,7 @@ mat-progress-bar {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 98%;
+  width: 100%;
   padding: 10px;
   margin: auto;
   text-align: center;
