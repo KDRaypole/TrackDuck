@@ -21,12 +21,14 @@
             {{playlist.name}}
           </mat-card-title>
           <mat-icon *ngIf="!playlist.public">lock</mat-icon>
-          <div [attr.data-playlist-id]="playlist.id" *ngIf="playlist.public" class="js-playlist-id">
+          <div *ngIf="playlist.public" class="js-playlist-id">
             <mat-checkbox [(ngModel)]="playlist.selected" color="primary"></mat-checkbox>
           </div>
         </mat-card-header>
-        <img *ngIf="playlist.images[0]" mat-card-image src={{playlist.images[0].url}} alt="">
-        <img *ngIf="!playlist.images[0]" mat-card-image src="../../assets/img/logo.png" alt="">
+        <div class="image-container" [attr.data-playlist-id]="playlist.id">
+          <img *ngIf="playlist.images[0]" mat-card-image src={{playlist.images[0].url}} alt="">
+          <img *ngIf="!playlist.images[0]" mat-card-image src="../../assets/img/logo.png" alt="">
+        </div>
         <mat-card-actions class="playlist-actions">
           <button (click)="getPlaylistsSongs(user.id, playlist)" mat-button>OPEN</button>
           <button color="warn" (click)="deletePlaylist(user.id, playlist)" mat-button>DELETE</button>
