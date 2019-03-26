@@ -115,7 +115,7 @@ export class PlaylistComponent implements OnInit {
 
   search(q) {
     this.searchLoading = true;
-    this._spotify.search(q, "track,playlist", {limit: 10, market: 'from_token'})
+    this._spotify.search(q, "track,playlist", {limit: 50, market: 'from_token'})
       .subscribe(data => {
         this.searchTracks = data.tracks.items
         this.searchPlaylists = data.playlists.items

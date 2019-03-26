@@ -48,7 +48,7 @@
       infinite-scroll
       [scrollWindow]="false"
       [infiniteScrollDistance]="2"
-      [infiniteScrollThrottle]="50"
+      [infiniteScrollThrottle]="150"
       (scrolled)="onScrolled()">
       <mat-card *ngIf="!!currentPlaylist">{{currentPlaylist.name}}</mat-card>
       <mat-card *ngIf="!currentPlaylist">My Library</mat-card>
