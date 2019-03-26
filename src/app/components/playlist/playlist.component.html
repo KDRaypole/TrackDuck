@@ -43,12 +43,13 @@
   </div>
 
   <div
-  class="col-sm-6" 
-  infiniteScroll
-  [infiniteScrollDistance]="2"
-  [infiniteScrollThrottle]="300"
-  (scrolled)="onScrolled()">
-    <div class="selected-playlist">
+  class="col-sm-6">
+    <div class="selected-playlist"
+      infinite-scroll
+      [scrollWindow]="false"
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="onScrolled()">
       <mat-card *ngIf="!!currentPlaylist">{{currentPlaylist.name}}</mat-card>
       <mat-card *ngIf="!currentPlaylist">My Library</mat-card>
       <div
