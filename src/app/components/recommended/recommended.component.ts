@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SpotifyService } from '../../services/spotify/spotify.service';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { PlaylistPreviewComponent } from '../playlist-preview/playlist-preview.component';
+import { MatCheckboxModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-recommended',
@@ -17,7 +18,7 @@ export class RecommendedComponent implements OnInit {
   loading: boolean = false;
 
 
-  constructor(private _spotify: SpotifyService, private formBuilder: FormBuilder, public snackBar: MatSnackBar) {
+  constructor(private _spotify: SpotifyService, private formBuilder: FormBuilder, public dialog: MatDialog, public snackBar: MatSnackBar) {
     this._spotify.getCurrentUser().subscribe(data => {
         this.user = data;
     }, err=> { console.log(err); });
@@ -67,6 +68,14 @@ export class RecommendedComponent implements OnInit {
 
   dbLabel(value: number | null) {
     return value + "db";
+  }
+
+  previewPlaylist(playlist) {
+    const dialogRef = this.dialog.open(PlaylistPreviewComponent, {
+      width: '60%',
+      height: '90%',
+      data: {userId: this.user.id, playlistId: playlist.id, playlistName: playlist.name}
+    });
   }
 
   private calculateSeeds() : Observable<any> {

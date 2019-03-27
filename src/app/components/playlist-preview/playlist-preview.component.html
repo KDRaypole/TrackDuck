@@ -1,0 +1,45 @@
+<div class="modal-container">
+  <div class="modal-controls">
+    <h3>
+      {{playlistName}}
+    </h3>
+
+    <button mat-button mat-dialog-close>
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+
+  <div class="featured">
+    <mat-card class="track-box" *ngFor="let track of tracks">
+      <mat-progress-bar color="primary" mode="determinate" [value]="track.track.popularity"></mat-progress-bar>
+      <div class="track-box-contents">
+        <div class="add-song">
+          <button mat-icon-button color="primary">
+            <mat-icon (click)="addTrackToLibrary(track.track.uri)" class="">add</mat-icon>
+          </button>
+        </div>
+        <div class="album-image">
+          <img [src]="!!track.track.album.images[2] ? track.track.album.images[2].url : '/assets/img/logo.png'" alt="">
+        </div>
+        <div class="track-info">
+          <h5>
+            <strong>{{track.track.name}}</strong>
+          </h5>
+          <p>
+            <button class="artist-link" (click)="search(track.track.artists[0].name)">
+              {{track.track.artists[0].name}}
+            </button>
+            <span *ngIf="track.track.artists[1]">
+              &
+              <button class="artist-link" (click)="search(track.track.artists[1].name)">
+               {{track.track.artists[1].name}}
+              </button>
+            </span>
+          </p>
+        </div>
+        <div class="remove-song">
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

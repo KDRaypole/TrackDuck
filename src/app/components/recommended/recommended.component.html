@@ -12,7 +12,7 @@
       </mat-card-header>
       <img mat-card-image [src]="!!playlist.images[0] ? playlist.images[0].url : '/assets/img/logo.png'" alt="">
       <mat-card-actions class="playlist-actions">
-        <button (click)="getPlaylistsSongs(user.id, playlist)" mat-button>OPEN</button>
+        <button (click)="previewPlaylist(playlist)" mat-button>OPEN</button>
       </mat-card-actions>
     </mat-card>
   </div>

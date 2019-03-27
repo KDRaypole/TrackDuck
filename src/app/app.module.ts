@@ -25,6 +25,7 @@ import { SecureComponent } from './layouts/secure/secure.component';
 import { PublicNavComponent } from './components/public-nav/public-nav.component';
 import { HomeComponent } from './components/home/home.component';
 import { RecommendedComponent } from './components/recommended/recommended.component';
+import { PlaylistPreviewComponent } from './components/playlist-preview/playlist-preview.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { RecommendedComponent } from './components/recommended/recommended.compo
     SecureComponent,
     PublicNavComponent,
     HomeComponent,
-    RecommendedComponent
+    RecommendedComponent,
+    PlaylistPreviewComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +68,8 @@ import { RecommendedComponent } from './components/recommended/recommended.compo
     HttpModule
   ],
   entryComponents: [
-    NewPlaylistComponent
+    NewPlaylistComponent,
+    PlaylistPreviewComponent
   ],
   providers: [
    SpotifyService, {
