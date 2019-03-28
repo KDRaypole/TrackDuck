@@ -27,8 +27,8 @@
         </mat-card-header>
 
         <div class="image-container" [attr.data-playlist-id]="playlist.id">
-          <img *ngIf="playlist.images[0]" mat-card-image [src]="playlist.images[0].url" alt="">
-          <img *ngIf="!playlist.images[0]" mat-card-image [src]="../../assets/img/logo.png" alt="">
+          <img *ngIf="!!playlist.images[0]" mat-card-image [src]="playlist.images[0].url" alt="">
+          <img *ngIf="!playlist.images[0]" mat-card-image src="../../assets/img/logo.png" alt="">
         </div>
 
         <mat-card-actions class="playlist-actions">
