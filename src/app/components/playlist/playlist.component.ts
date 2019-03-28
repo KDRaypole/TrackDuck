@@ -48,7 +48,13 @@ export class PlaylistComponent implements OnInit {
           this.snackBar.open("Track added!", "close", {
             duration: 5000,
             panelClass: ['dark-snackbar']
+
           });
+
+          this._spotify.getPlaylistImages(playlist.id)
+            .subscribe(data => {
+              this.replaceImages(data[0].url, playlist.id)
+            })
 
           if (playlist.id == this.currentPlaylist.id) {
             this._spotify.getPlaylistTracks(this.user.id, playlist.id, {snapshot_id: data.snapshot_id})
@@ -84,6 +90,11 @@ export class PlaylistComponent implements OnInit {
         this._spotify.getPlaylistTracks(user_id, playlist_id, {snapshot_id: data.snapshot_id})
           .subscribe(data => {
             this.tracks = data.items
+
+            this._spotify.getPlaylistImages(playlist_id)
+              .subscribe(data => {
+                this.replaceImages(data[0].url, playlist_id)
+              })
           })
       })
   }
@@ -166,5 +177,9 @@ export class PlaylistComponent implements OnInit {
             this.tracks = data.items
           })
       })
+  }
+
+  private replaceImages(url, playlist_id) {
+    $('div').find(`[data-playlist-id='${playlist_id}']`).find('img').attr('src', url)
   }
 }

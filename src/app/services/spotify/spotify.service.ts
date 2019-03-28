@@ -382,6 +382,14 @@ export class SpotifyService {
     }).map(res => res.json());
   }
 
+  getPlaylistImages(playlistId: string) {
+    return this.api({
+      method: 'get',
+      url: `/playlists/${playlistId}/images`,
+      headers: this.getHeaders()
+    }).map(res => res.json());
+  }
+
   getPlaylistTracks(userId: string, playlistId: string, options?: SpotifyOptions) {
     return this.api({
       method: 'get',
