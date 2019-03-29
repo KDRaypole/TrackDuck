@@ -76,7 +76,7 @@ export class PlaylistComponent implements OnInit {
   }
 
   getPlaylistsSongs(user_id, playlist) {
-    this.resetLimitAndOffset()
+    this.resetOffset()
     this.currentPlaylist = playlist
 
     this._spotify.getPlaylistTracks(user_id, playlist.id, {limit: this.limit, offset: this.offset})
@@ -144,7 +144,7 @@ export class PlaylistComponent implements OnInit {
   }
 
   getUserLibrary() {
-    this.resetLimitAndOffset()
+    this.resetOffset()
 
     this._spotify.getSavedUserTracks({limit: this.limit, offset: this.offset})
       .subscribe(data => {
