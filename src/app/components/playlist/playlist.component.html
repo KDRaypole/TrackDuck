@@ -42,8 +42,14 @@
     </div>
   </div>
 
-  <div class="col-sm-6">
-    <div class="selected-playlist">
+  <div
+  class="col-sm-6">
+    <div class="selected-playlist"
+      infinite-scroll
+      [scrollWindow]="false"
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="150"
+      (scrolled)="onScrolled()">
       <mat-card *ngIf="!!currentPlaylist">{{currentPlaylist.name}}</mat-card>
       <mat-card *ngIf="!currentPlaylist">My Library</mat-card>
       <div
@@ -52,7 +58,6 @@
         [cdkDropListData]="tracks"
         (cdkDropListDropped)="drop($event)"
         *ngIf="!!tracks">
-
         <mat-card class="track-box" *ngFor="let track of tracks" cdkDrag>
           <mat-progress-bar color="primary" mode="determinate" [value]="track.track.popularity"></mat-progress-bar>
           <div class="custom-placeholder" *cdkDragPlaceholder></div>

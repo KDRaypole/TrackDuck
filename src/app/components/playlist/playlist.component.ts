@@ -24,6 +24,8 @@ export class PlaylistComponent implements OnInit {
   private featuredPlaylists: any[];
   private searchLoading: boolean;
   private tracksLoading: boolean;
+  private offset: number = 0;
+  private limit: number = 50;
 
   constructor(private _spotify: SpotifyService, public dialog: MatDialog, public snackBar: MatSnackBar) {
     this.searchLoading = false;
@@ -69,18 +71,18 @@ export class PlaylistComponent implements OnInit {
   getPlaylists() {
     this._spotify.getCurrentUserPlaylists()
       .subscribe(data => {
-        console.log(data.items)
         this.playlists = data.items
       })
   }
 
   getPlaylistsSongs(user_id, playlist) {
+    this.resetOffset()
     this.currentPlaylist = playlist
 
-    this._spotify.getPlaylistTracks(user_id, playlist.id)
+    this._spotify.getPlaylistTracks(user_id, playlist.id, {limit: this.limit, offset: this.offset})
       .subscribe(data => {
+        this.increaseOffset()
         this.tracks = data.items
-        console.log(this.tracks)
       })
   }
 
@@ -113,9 +115,8 @@ export class PlaylistComponent implements OnInit {
 
   search(q) {
     this.searchLoading = true;
-    this._spotify.search(q, "track,playlist", {limit: 10, market: 'from_token'})
+    this._spotify.search(q, "track,playlist", {limit: 30, market: 'from_token'})
       .subscribe(data => {
-        console.log(data)
         this.searchTracks = data.tracks.items
         this.searchPlaylists = data.playlists.items
         this.searchLoading = false
@@ -143,8 +144,11 @@ export class PlaylistComponent implements OnInit {
   }
 
   getUserLibrary() {
-    this._spotify.getSavedUserTracks({limit: 50})
+    this.resetOffset()
+
+    this._spotify.getSavedUserTracks({limit: this.limit, offset: this.offset})
       .subscribe(data => {
+        this.increaseOffset()
         this.tracks = data.items
         this.currentPlaylist = ""
       })
@@ -166,6 +170,32 @@ export class PlaylistComponent implements OnInit {
       })
   }
 
+  onScrolled(){
+    if (!!this.currentPlaylist) {
+      this._spotify.getPlaylistTracks(this.user.id, this.currentPlaylist.id, {limit: this.limit, offset: this.offset})
+        .subscribe(data => {
+          if (data.items.length > 0) {
+            this.increaseOffset()
+
+            data.items.forEach(item => {
+              this.tracks.push(item)
+            })
+          }
+        })
+    } else {
+      this._spotify.getSavedUserTracks({limit: this.limit, offset: this.offset})
+        .subscribe(data => {
+          if (data.items.length > 0) {
+            this.increaseOffset()
+
+            data.items.forEach(item => {
+              this.tracks.push(item)
+            })
+          }
+        })
+    }
+  }
+
   private reorderPlaylistTracks(tracks, previousIndex, currentIndex) {
     if (previousIndex < currentIndex) {
       currentIndex += 1
@@ -181,5 +211,13 @@ export class PlaylistComponent implements OnInit {
 
   private replaceImages(url, playlist_id) {
     $('div').find(`[data-playlist-id='${playlist_id}']`).find('img').attr('src', url)
+  }
+
+  private increaseOffset() {
+    this.offset += this.limit
+  }
+
+  private resetOffset() {
+    this.offset = 0;
   }
 }
