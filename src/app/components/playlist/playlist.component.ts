@@ -151,7 +151,7 @@ export class PlaylistComponent implements OnInit {
   }
 
   deletePlaylist(user_id, playlist) {
-    if(window.confirm('Are sure you want to delete this item ?')){
+    if(window.confirm('Are sure you want to remove this playlist?')){
       this._spotify.unfollowPlaylist(user_id, playlist.id)
         .subscribe(data => {
           this.getPlaylists()

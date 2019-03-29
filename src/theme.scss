@@ -12,10 +12,15 @@
 $default-theme-primary: mat-palette($mat-green);
 $default-theme-accent: mat-palette($mat-blue-grey);
 $default-theme-warn: mat-palette($mat-deep-orange, A400);
+$custom-typography: mat-typography-config( $font-family: 'spotify-circular, monospace', $headline: mat-typography-level(32px, 48px, 700), $body-1: mat-typography-level(16px, 24px, 500));
 $default-theme: mat-dark-theme($default-theme-primary, $default-theme-accent, $default-theme-warn);
 $light-theme: mat-light-theme($default-theme-primary, $default-theme-accent, $default-theme-warn);
-$custom-typography: mat-typography-config( $font-family: 'spotify-circular, monospace', $headline: mat-typography-level(32px, 48px, 700), $body-1: mat-typography-level(16px, 24px, 500));
 
+
+$light-theme: mat-light-theme($default-theme-primary, $default-theme-accent, $default-theme-warn);
+
+@include mat-base-typography($custom-typography);
+@include mat-checkbox-typography($custom-typography);
 @include angular-material-typography($custom-typography);
 @include angular-material-theme($default-theme);
 

@@ -7,14 +7,11 @@ import { SpotifyService } from '../spotify/spotify.service'
 export class AuthGuardService implements CanActivate {
   private user:any;
 
-  constructor(
-    private router: Router,
+  constructor( private router: Router,
     private _spotify: SpotifyService
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    
-
     if (this.userLoggedIn()) {
       return true;
     } else {
@@ -23,13 +20,9 @@ export class AuthGuardService implements CanActivate {
     }
   }
 
-  userLoggedIn(): Observable<boolean>{
+  userLoggedIn() : Observable<boolean>{
     return this._spotify.getCurrentUser().map(data => {
-      if(data) {
-        return true;
-      } else {
-        return false;
-      }
+      return !!data
     })
   }
 }

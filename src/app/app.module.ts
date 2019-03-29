@@ -4,10 +4,11 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NavComponent } from './components/nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { LoginComponent } from './components/login/login.component';
-import { MatTabsModule, MatProgressBarModule, MatSnackBarModule, MatCheckboxModule, MatInputModule, MatDialogModule, MatSlideToggleModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
+import { MatSliderModule, MatTabsModule, MatProgressBarModule, MatSnackBarModule, MatCheckboxModule, MatInputModule, MatDialogModule, MatSlideToggleModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
 import { SpotifyService } from './services/spotify/spotify.service';
 import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { HttpModule } from '@angular/http';
@@ -23,6 +24,8 @@ import { PublicComponent } from './layouts/public/public.component';
 import { SecureComponent } from './layouts/secure/secure.component';
 import { PublicNavComponent } from './components/public-nav/public-nav.component';
 import { HomeComponent } from './components/home/home.component';
+import { RecommendedComponent } from './components/recommended/recommended.component';
+import { PlaylistPreviewComponent } from './components/playlist-preview/playlist-preview.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,9 @@ import { HomeComponent } from './components/home/home.component';
     PublicComponent,
     SecureComponent,
     PublicNavComponent,
-    HomeComponent
+    HomeComponent,
+    RecommendedComponent,
+    PlaylistPreviewComponent
   ],
   imports: [
     BrowserModule,
@@ -58,10 +63,13 @@ import { HomeComponent } from './components/home/home.component';
     MatSnackBarModule,
     MatProgressBarModule,
     MatTabsModule,
+    MatSliderModule,
+    ReactiveFormsModule,
     HttpModule
   ],
   entryComponents: [
-    NewPlaylistComponent
+    NewPlaylistComponent,
+    PlaylistPreviewComponent
   ],
   providers: [
    SpotifyService, {
