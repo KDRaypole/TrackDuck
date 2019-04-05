@@ -33,7 +33,7 @@
 
         <mat-card-actions class="playlist-actions">
           <button (click)="getPlaylistsSongs(user.id, playlist)" mat-button>OPEN</button>
-          <button color="warn" (click)="deletePlaylist(user.id, playlist)" mat-button>DELETE</button>
+          <button color="warn" (click)="deletePlaylist(user.id, playlist)" mat-button>REMOVE</button>
         </mat-card-actions>
       </mat-card>
       <mat-card (click)="newPlaylistDialog()" class="add-playlist">
@@ -47,7 +47,7 @@
     <div class="selected-playlist"
       infinite-scroll
       [scrollWindow]="false"
-      [infiniteScrollDistance]="2"
+      [infiniteScrollDistance]="4"
       [infiniteScrollThrottle]="150"
       (scrolled)="onScrolled()">
       <mat-card *ngIf="!!currentPlaylist">{{currentPlaylist.name}}</mat-card>
