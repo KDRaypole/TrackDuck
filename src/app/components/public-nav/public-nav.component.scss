@@ -1,6 +1,10 @@
 mat-toolbar {
   position: fixed;
 
+  mat-toolbar-row {
+    min-height: 64px;
+  }
+
   button {
     margin: 10px;
   }
