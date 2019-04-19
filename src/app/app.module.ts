@@ -29,6 +29,7 @@ import { PlaylistPreviewComponent } from './components/playlist-preview/playlist
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { AboutComponent } from './components/about/about.component'
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     PublicNavComponent,
     HomeComponent,
     RecommendedComponent,
-    PlaylistPreviewComponent
+    PlaylistPreviewComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
