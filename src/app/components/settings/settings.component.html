@@ -1,9 +1,5 @@
-<section>
+<div class="fluid-container">
+  <h2>Settings</h2>
+  <br>
   <button color='primary' *ngIf="!user" (click)="logout()" mat-flat-button>Logout</button>
-</section>
-
-<section>
-  <mat-slide-toggle color="warn" [disabled]="disabled">
-    Slide me!
-  </mat-slide-toggle>
-</section>
+</div>
