@@ -14,8 +14,8 @@ export interface DialogData {
   styleUrls: ['./playlist-preview.component.scss']
 })
 export class PlaylistPreviewComponent implements OnInit {
-  private playlistName: string 
-  private tracks: any[]
+  playlistName: string 
+  tracks: any[]
 
   constructor(
     public dialogRef: MatDialogRef<PlaylistPreviewComponent>,

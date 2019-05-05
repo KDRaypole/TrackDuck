@@ -8,6 +8,7 @@ import { SpotifyService } from '../../services/spotify/spotify.service'
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
+  user: any;
 
   constructor(private router: Router, private _spotify: SpotifyService) { }
 
