@@ -12,20 +12,21 @@ import * as $ from 'jquery';
   styleUrls: ['./playlist.component.scss']
 })
 export class PlaylistComponent implements OnInit {
-  private user: any;
-  private currentPlaylist: any;
-  private playlists: any[];
-  private tracks: any[];
-  private searchTracks: any[];
-  private searchPlaylists: any[];
-  private searchAlbums: any[];
-  private searchArtists: any[];
-  private newPlaylistTitle: any;
-  private featuredPlaylists: any[];
-  private searchLoading: boolean;
-  private tracksLoading: boolean;
-  private offset: number = 0;
-  private limit: number = 50;
+  value: any;
+  user: any;
+  currentPlaylist: any;
+  playlists: any[];
+  tracks: any[];
+  searchTracks: any[];
+  searchPlaylists: any[];
+  searchAlbums: any[];
+  searchArtists: any[];
+  newPlaylistTitle: any;
+  featuredPlaylists: any[];
+  searchLoading: boolean;
+  tracksLoading: boolean;
+  offset: number = 0;
+  limit: number = 50;
 
   constructor(private _spotify: SpotifyService, public dialog: MatDialog, public snackBar: MatSnackBar) {
     this.searchLoading = false;

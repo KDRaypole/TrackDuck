@@ -11,9 +11,9 @@ import { MatCheckboxModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBa
   styleUrls: ['./recommended.component.scss']
 })
 export class RecommendedComponent implements OnInit {
-  private user:any;
-  private featuredPlaylists:any[];
-  private recommendedTracks:any[];
+  user:any;
+  featuredPlaylists:any[];
+  recommendedTracks:any[];
   form: FormGroup;
   loading: boolean = false;
 
